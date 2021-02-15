@@ -7,7 +7,7 @@ navbar:
       href: index.html
     - text: "R Basics"
       href: rbasics.html
-    - text: "Water quality""
+    - text: "Water quality"
       href: wq.html
     - text: "Pathogens"
       href: pathogens.html
