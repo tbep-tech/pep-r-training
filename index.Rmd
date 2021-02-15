@@ -1,0 +1,52 @@
+# PEP R Training
+
+[R](https://www.r-project.org/) is a language for statistical computing as well as a general purpose programming language. R has become one of the primary languages used in data science and for data analysis across many of the natural sciences. This training workshop will provide attendees with the foundation for using R work with PEP reporting products. 
+
+## Course objectives
+
+This course is designed to expose you to the fundamentals of using R for working with the [pepreporting](https://tbep-tech.github.io/pepreporting/index.html) R package.  We will also cover the basics of using R to work with enviornmental data. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
+
+* Understand R fundamentals
+* Use the pepreporting package to read, analyze, and plot water quality data
+* Use the pepreporting package to read, analyze, and plot pathogens data
+* Use the pepreporting package to read, analyze, and plot dissolved oxygen data
+
+## Agenda
+
+* __9:00 - 10:00__ R Basics
+
+  BREAK (10 min)
+
+* __10:20 - 11:00__ Water quality 
+
+  BREAK (10 min)
+  
+* __11:10 - 12:00__ Pathogens and DO
+
+## Software requirements
+
+This trainings will use RStudio and R. Please make sure that you are ready to use the required software prior to the workshop.  __We will not be available for installation issues or questions on training days__.  There are two options for setup:
+
+1. Use RStudio Cloud to access from a web browser following the [setup instructions](setupcloud.html). 
+
+     OR 
+     
+1. Install RStudio and R on your personal computer following the [setup instructions](setup.html). 
+
+## Data and resources
+
+Please view the [Data and Resources](Data_and_Resources.html) page for data used in the training and additional links for R learning material.  A [live coding](https://tinyurl.com/live-pep){target="_blank"} link is also available.
+
+## Instructor
+
+[Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([mbeck@tbep.org](mailto:mbeck@tbep.org)) - Marcus is the Program Scientist for the Tampa Bay Estuary Program and is developing data analysis and visualization methods for Bay health indicators.  He received his BS in Zoology from the University of Florida in 2007 and his MSc and PhD in Conservation Biology from the University of Minnesota in 2009 and 2013. Marcus has experience researching environmental indicators and developing open science products to support environmental decision-making.
+
+## Source content
+
+All source materials for this website can be accessed at https://github.com/tbep-tech/pep-r-training
+
+ [![build](https://github.com/tbep-tech/pep-r-training/workflows/build/badge.svg)](https://github.com/tbep-tech/pep-r-training/actions) This site is built automatically with GitHub Actions. Last site build `r Sys.time()`.
+ 
+ <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'><img alt='Creative Commons License' style='border-width:0' src='https://i.creativecommons.org/l/by/4.0/88x31.png' /></a>&nbsp;&nbsp;This website is licensed under a <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>Creative Commons Attribution 4.0 International License</a>.
+
+

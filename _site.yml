@@ -1,0 +1,31 @@
+name: "pep-r-training"
+navbar:
+  title: "PEP R Training"
+  type: inverse
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "R Basics"
+      href: rbasics.html
+    - text: "Water quality""
+      href: wq.html
+    - text: "Pathogens"
+      href: pathogens.html
+    - text: "Dissolved oxygen"
+      href: do.html
+  right:
+    - text: "Data and resources"
+      icon: fa-list
+      href: Data_and_Resources.html
+    - icon: fa-github fa-lg
+      href: https://github.com/tbep-tech/pep-r-training
+output_dir: "."
+output:
+  html_document:
+    theme: spacelab
+    highlight: textmate
+    toc: true
+    toc_float: 
+       collapsed: true
+       
+    
