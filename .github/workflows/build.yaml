@@ -24,7 +24,9 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install R package dependencies
         run: |
-          install.packages(c("rmarkdown", "dplyr"))
+          install.packages(c("rmarkdown", "tidyverse", "remotes"))
+          remotes::install_github("tbep-tech/pepreporting")
+          remotes::install_version("mapview", version = "2.7.8")
         shell: Rscript {0}
       - name: Render site
         run: Rscript -e "source('sitebuild.R')"

@@ -158,6 +158,7 @@ We're going to install some packages from CRAN that will give us the tools for o
 # install packages from CRAN
 install.packages("tidyverse")
 install.packages("remotes")
+install.packages("mapview")
 remotes::install_github("remotes/pepreporting")
     ```
 
