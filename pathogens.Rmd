@@ -11,7 +11,7 @@ library(tidyverse)
 
 # Pathogens
 
-Get the lesson R script: [wq.R](pathogens.R)
+Get the lesson R script: [pathogens.R](pathogens.R)
 
 Get the lesson data: [download zip](data/data.zip)
 

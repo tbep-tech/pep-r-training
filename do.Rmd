@@ -4,6 +4,94 @@ options(repos = "http://cran.rstudio.com/")
 pkgs <- c("dplyr", "knitr")
 x<-lapply(pkgs, library, character.only = TRUE)
 opts_chunk$set(tidy = FALSE, message = F, warning = F)
+
+library(peptools)
+library(ggplot2)
+
+data(dodat)
 ```
 
 # Dissolved oxygen
+
+Get the lesson R script: [do.R](do.R)
+
+## Lesson Outline
+
+- [Goals and motivation]
+- [Importing DO data]
+- [Summarizing DO data]
+- [Plotting DO data]
+
+## Goals and motivation
+
+This module will provide you with background on how to use the peptools R package to import, summarize, and plot dissolved oxygen data. You should be able to answer these questions at the end of this session:
+
+* How can I use the peptools package to import dissolved oxygen data? 
+* How does the peptools package summarize dissolved oxygen data for reporting?
+* What functions are available for summarizing dissolved oxygen data?
+* What functions are available for plotting dissolved oxygen data?
+
+## Importing DO data
+
+Two continuous USGS monitoring stations collect DO data at locations in the Peconic Estuary: USGS stations 01304562 in the Peconic River and 01304200 in Orient Harbor.  Data at these stations can be downloaded using the `read_pepdo()` function.  
+
+```{r, eval = F}
+exdat <- read_pepdo(site = c('01304562', '01304200'), nms = c('Peconic R.', 'Orient Harbor'), startDate = '2020-06-01', endDate = '2020-06-30')
+```
+
+The `dodat` data object included with the package provides DO data from 2013 to 2020 at the two sites.  This takes several minutes to download using the `read_pepdo()` function, so it is included with the package for ease of use.
+
+```{r}
+head(dodat)
+```
+
+## Summarizing DO data
+
+Dissolved oxygen data typically show daily and seasonal variation.  Summaries of condition should account for variation at both temporal scales. Further, the impact of low dissolved oxygen concentrations on biota can vary depending on both magnitude and duration of hypoxia/anoxia.  As such, condition assessment could also consider how often concentrations fall below a thresholds and for how long. The assessments below speak to each of these needs. 
+
+First, the data can be summarized from the continuous (~6 minute observations) to daily averages using the `anlz_dodlpep()` function.  A user-specified threshold can be supplied to the `thr` argument to summarize the data relative to a value of interest, the default value being the acute threshold of 3 mg/L (an alternative may be the chronic threshold of 4.8 mg/L, [USEPA 2000](Ambient aquatic life water quality criteria for dissolved oxygen (saltwater): Cape Cod to Cape Hatteras)).
+
+```{r}
+# 3 mg/l is acute, 4.8 mg/l is chronic
+dlysum <- anlz_dodlypep(dodat, thr = 3)
+dlysum
+```
+
+The last three columns show the daily summarized data.  The `do_mgl` column shows the average DO concentration for each day, the `below` column shows a 1 (yes) or 0 (no) if the concentration was below the threshold value at any point during a day, and the `below_cumsum` column shows a cumulative tally of the number of days in each month at which dissolved oxygen fell below the threshold at any point during a day.
+
+The data can also be summarized by month using the `anlz_domopep()` function.  Summarizing by month distills the information into a simple format for plotting.  Internally, the `anlz_domopep()` function uses the `anlz_dodlypep()` function to first summarize results by day, which are then summarized by month.
+
+```{r}
+mosum <- anlz_domopep(dodat, thr = 3)
+mosum
+```
+
+The last three columns show the monthly summarized data, where `do_mgl` is the average of all daily DO averages across the month, `below_ave` is the proportion of days in a month when concentrations in a given day fell below the threshold (1 would mean all days had an instance of DO below the threshold, 0 would mean none), and `below_maxrun()` is the maximum number of sequential days in a month when concentrations in a given day fell below the threshold (30 or 31, depending on month, would indicate all days in a month had an instance of DO below the threshold). 
+
+The `below_ave` and `below_maxrun` columns summarize the DO data differently depending on how hypoxia/anoxia conditions can be described relative to potential impacts on biological resources. The `below_ave` column summarizes undersaturation relative to only the number of times hypoxia conditions occurred, whereas the `below_maxrun` column summarizes undersaturation relative to both the number of instances and duration of hypoxia.  In other words, biota may be stressed differently depending on the number of times hypoxia occurs vs how long it may persist. The two measures may indicate similar information, but not always depending on characteristics of the DO time series.    
+
+## Plotting DO data
+
+The summarized monthly data can be plotted with the `show_domatrix()` function. In this example, the default plot shows the proportion of days in a month when concentrations in a given day fell below a threshold of 3 mg/L. 
+
+```{r, fig.height = 6, fig.width = 8}
+show_domatrix(dodat, thr = 3, show = 'below_ave')
+```
+
+The maximum number of sequential days in a month when concentrations in a given day fell below the threshold can also be plotted by changing the `show` argument. 
+
+```{r, fig.height = 6, fig.width = 8}
+show_domatrix(dodat, thr = 3, show = 'below_maxrun')
+```
+
+The threshold can also be changed.  For example, the chronic threshold of 4.8 mg/L shows conditions relative to a more conservative threshold. 
+
+```{r, fig.height = 6, fig.width = 8}
+show_domatrix(dodat, thr = 4.8, show = 'below_ave')
+```
+
+Plotting the results provides insights into hypoxia patterns at the site depending on how under-saturated conditions were summarized.  Additional considerations may include:
+
+1) Relevance of a threshold to biological indicator 
+1) Spatial extent of the indicators
+1) Breakpoints for management decisions
