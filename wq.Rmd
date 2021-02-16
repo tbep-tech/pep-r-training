@@ -102,18 +102,18 @@ mapview(pepseg)
 The water quality data can be imported using the `read_pepwq()` function.  A compressed folder that includes the data can be downloaded from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=8107f192ffac406380b6d61d3d3dbf7d).  After the data are downloaded and extracted, the Excel file with the raw data is named "Peconics SCDHS WQ data - up to 2019 so far.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "currentdata.xlsx" that contains the water quality data is imported. 
 
 ```{r}
-dat <- read_pepwq('data/currentdata.xlsx')
-head(dat)
+rawdat <- read_pepwq('data/currentdata.xlsx')
+head(rawdat)
 ```
 
-The raw data includes multiple fields, but only the chlorophyll and secchi data are retained for reporting.  The data are in long format with the `name` column showing which observation (chlorophyll or secchi) the row `value` shows and the `status` showing if the observation was above or below detection (indicated as `>` or `<`).  Each station is also grouped by major bay segment, defined as `r levels(dat$bay_segment)`. 
+The raw data includes multiple fields, but only the chlorophyll and secchi data are retained for reporting.  The data are in long format with the `name` column showing which observation (chlorophyll or secchi) the row `value` shows and the `status` showing if the observation was above or below detection (indicated as `>` or `<`).  Each station is also grouped by major bay segment, defined as `r levels(rawdat$bay_segment)`. 
 
 The function `anlz_pepdat()` summarizes the station data by bay segment.  The function returns annual means for chlorophyll and secchi depth and monthly means by year for chlorophyll and secchi depth. These summaries are then used to determine if bay segment targets for water quality are met using the anlz_attain() and `anlz_attainpep()` function.
 
 Below shows how to use `anlz_pepdat()` to summarize the data by bay segment to estimate annual and monthly means for chlorophyll and secchi depth. The output is a two-element list for the annual (ann) and monthly (mos) means by segment.
 
 ```{r}
-medpep <- anlz_medpep(dat)
+medpep <- anlz_medpep(rawdat)
 medpep
 ```
 
@@ -132,56 +132,56 @@ The `show_sitemappep()` function produces an interactive map of annual medians o
 Here, the 2019 chlorophyll medians are shown for stations in all bay segments. 
 
 ```{r}
-show_sitemappep(dat, 2019)
+show_sitemappep(rawdat, 2019)
 ```
 
 A different year, parameter, and bay segment can also be chosen. Note that the size and color ramps are reversed for secchi depth, such that smaller and bluer points indicate larger secchi values. 
 
 ```{r}
-show_sitemappep(dat, 2010, 'sd', c('Central', 'Eastern'))
+show_sitemappep(rawdat, 2010, 'sd', c('Central', 'Eastern'))
 ```
 
 By default, the color and size scaling in `show_sitemappep()` is relative to only the points on the map. You can view scaling relative to all values in the dataset (across time and space) to get a sense of how the values for the selected year compare to the rest of the record.  This can be done by changing the `relative` argument to `TRUE`. 
 
 ```{r}
-show_sitemappep(dat, 2019, relative = T)
+show_sitemappep(rawdat, 2019, relative = T)
 ```
 
 The scaling is also sensitive to outliers.  The default is to use the maximum scaling as the 99th percentile value observed in the entire dataset for the chosen parameter.  Otherwise, non-sensical results will be returned if the absolute maximum value is used to set the scale.  If, however, you want to see scaling relative to a smaller quantile, you can choose it accordingly with the `maxrel` argument.  The size and color ramps will be scaled to the defined upper quantile value.  The actual observed value at a point will always be visible on mouseover.
 
 ```{r}
-show_sitemappep(dat, 2019, relative = T, maxrel = 0.8)
+show_sitemappep(rawdat, 2019, relative = T, maxrel = 0.8)
 ```
 
 The `show_thrpep()` function provides a more descriptive assessment of annual trends for a chosen bay segment relative to thresholds. In this plot we show the annual medians and non-parametric confidence internals (95%) across stations for a segment.  The red line shows annual trends and the horizontal blue line indicates the threshold for chlorophyll-a.
 
 ```{r, fig.height = 5, fig.width = 8}
-show_thrpep(dat, bay_segment = "Western", param = "chla")
+show_thrpep(rawdat, bay_segment = "Western", param = "chla")
 ```
 
 We can show the same plot but for secchi depth by changing the `param = "chla"` to `param = "sd"`.  Note the change in the horizontal reference lines for the secchi depth target.  Secchi trends must also be interpreted inversely to chlorophyll, such that lower values generally indicate less desirable water quality.
 
 ```{r, fig.height = 5, fig.width = 8}
-show_thrpep(dat, bay_segment = "Western", param = "sd")
+show_thrpep(rawdat, bay_segment = "Western", param = "sd")
 ```
 
 The year range to plot can also be specified using the `yrrng` argument, where the default is `yrrng = c(1990, 2019)`.
 
 ```{r, fig.height = 5, fig.width = 8}
-show_thrpep(dat, bay_segment = "Western", param = "chla", yrrng = c(1976, 2019))
+show_thrpep(rawdat, bay_segment = "Western", param = "chla", yrrng = c(1976, 2019))
 ```
 
 Similarly, the `show_boxpep()` function provides an assessment of seasonal changes in chlorophyll or secchi depth values by bay segment.  The most recent year is highlighted in red by default. This allows a simple evaluation of how the most recent year compared to historical averages.  The threshold value is shown in blue text and as the dotted line.  This is the same dotted line shown in `show_thrpep()`.    
 
 ```{r, fig.height = 5, fig.width = 8}
-show_boxpep(dat, param = 'chla', bay_segment = "Western")
-show_boxpep(dat, param = 'sd', bay_segment = "Eastern")
+show_boxpep(rawdat, param = 'chla', bay_segment = "Western")
+show_boxpep(rawdat, param = 'sd', bay_segment = "Eastern")
 ```
 
 A different subset of years and selected year of interest can also be viewed by changing the `yrrng` and `yrsel` arguments.  Here we show 1980 compared to monthly averages for the last ten years. 
 
 ```{r, fig.height = 5, fig.width = 8}
-show_boxpep(dat, param = 'chla', bay_segment = "Western", yrrng = c(2008, 2018), yrsel = 1990)
+show_boxpep(rawdat, param = 'chla', bay_segment = "Western", yrrng = c(2008, 2018), yrsel = 1990)
 ```
 
 The `show_thrpep()` function is useful to understand annual variation in chlorophyll and secchi depth relative to thresholds for each bay segment.  The information from these plots can provide an understanding of how the annual reporting outcomes are determined.  An outcome integer from zero to three is assigned to each bay segment for each annual estimate of chlorophyll and secchi depth.  These outcomes are based on both the exceedance of the annual estimate above the threshold (blue lines in `show_thrpep()`) and duration of the exceedance for the years prior.  The following graphic describes this logic [Janicki, Wade, and Pribble, 2000](https://drive.google.com/file/d/1XMULU8w4syWcSv_ciOUOhnC_G4xt6GIF/view).
@@ -213,31 +213,31 @@ knitr::include_graphics('figure/matrixcats.png')
 The results can be viewed with `show_matrixpep()`.
 
 ```{r, fig.height = 8, fig.width = 3}
-show_matrixpep(dat)
+show_matrixpep(rawdat)
 ```
 
 If preferred, the matrix can also be returned in an HTML table that can be sorted and scrolled. 
 
 ```{r}
-show_matrixpep(dat, asreact = TRUE)
+show_matrixpep(rawdat, asreact = TRUE)
 ```
 
 Bay segment exceedances can also be viewed in a matrix using `show_wqmatrixpep()`.  The not met/met outcome categories indicate if the median was above/below the threshold.  However, the small/large exceedances used for the overall report card depend on degree of overlap of the confidence intervals with the threshold. The matrix outcome below is a simplification that shows a binary outcome (not met/met) for location of the median relative to the threshold.
 
 ```{r, fig.height = 8, fig.width = 3}
-show_wqmatrixpep(dat)
+show_wqmatrixpep(rawdat)
 ```
 
 By default, the `show_wqmatrixpep()` function returns chlorophyll exceedances by segment.  Secchi depth exceedances can be viewed by changing the `param` argument.  Note that exceedances are reversed, i.e., lower values are considered less desirable water quality conditions for Secchi. 
 
 ```{r, fig.height = 8, fig.width = 3}
-show_wqmatrixpep(dat, param = 'sd')
+show_wqmatrixpep(rawdat, param = 'sd')
 ```
 
 The results from `show_matrixpep()` for both secchi and chlorophyll can be combined for an individual segment using the `show_segmatrixpep()` function. Only one segment can be plotted for each function call. 
 
 ```{r, fig.height = 8, fig.width = 2.5}
-show_segmatrixpep(dat, bay_segment = 'Western')
+show_segmatrixpep(rawdat, bay_segment = 'Western')
 ```
 
 Finally, all segment plots can be shown together using the `show_plotlypep()` function that combines chlorophyll and secchi data for a given segment.  This function combines outputs from `show_thrpep()` and `show_segmatrixpep()`. The final plot is interactive and can be zoomed by dragging the mouse pointer over a section of the plot. Information about each cell or value can be seen by hovering over a location in the plot. 
