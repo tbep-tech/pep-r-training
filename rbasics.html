@@ -496,32 +496,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1] 12.121201 12.657946 12.328241  8.490633  8.612954 10.119145 12.411865
-##   [8] 12.728322 10.061706  9.239350 11.464164 12.367079  8.057814  9.356684
-##  [15] 12.517037 11.837241  7.474520  8.322977  9.175312 10.108481 12.661198
-##  [22]  8.388969 11.274422 11.102437  7.912130  9.679937  8.802915 11.056321
-##  [29] 12.183760 10.166416  9.613745 10.297465 12.811041 15.409179 10.197664
-##  [36]  9.753791  4.901342 11.744501 12.036965  9.640937  9.191328  8.253391
-##  [43]  8.671177  9.626147  9.314236  6.379607  9.046340 10.256799  9.075328
-##  [50] 10.024204 15.100105  5.036351  8.442857 12.141624 10.209137  7.264797
-##  [57] 12.524663 11.680773 11.488935 14.488038 11.860586  8.172216  8.893508
-##  [64]  7.861643 18.213883 13.034485 10.590198 10.534924  8.450475 12.553277
-##  [71]  9.437713 11.007132  9.686218  5.505592 10.976968 10.604585  8.037882
-##  [78]  8.439578  8.458411  9.587077 11.320399 10.801372  8.998790  9.887574
-##  [85] 12.956638 11.024843  9.249675 12.426350  9.555867 10.389082 11.478223
-##  [92]  9.626027 13.418231  5.515081  9.296283  6.373122 12.619424 10.457044
-##  [99] 12.138270  6.798975</code></pre>
+<pre><code>##   [1] 11.810810  8.165297 13.589681 10.643778 13.934967  9.430604 12.004389
+##   [8]  7.799512 11.768110 12.215874 15.234293 11.035664 12.887464  9.751544
+##  [15]  9.968246  9.392033  6.636071  7.133778 10.097841  9.850019  6.614789
+##  [22]  6.847552 10.510999 10.351892 10.866283 10.080687  7.292530 12.365129
+##  [29] 13.818961  9.124567  9.988616 11.813767  8.077996 11.022262  6.888067
+##  [36]  8.236105  8.300952  5.438717 12.401683  7.809725  9.347259 11.304196
+##  [43] 11.156243  7.229418 12.866387 12.479672 10.680519  9.314319 11.200560
+##  [50]  9.016680  8.496513  9.867255  8.169776  8.764164 12.196426  9.807713
+##  [57] 10.529729 10.896711  6.782019 11.734418  8.020686  9.986092  8.995545
+##  [64]  7.772976 12.892128 11.953497 10.235060 13.667899  4.899665  9.642248
+##  [71]  8.923246  8.880585  9.649401  6.831688  4.364985  9.980223  9.588292
+##  [78] 13.953198  8.756138  9.573453 12.683669  9.509247 12.177407 10.385319
+##  [85] 11.669139  9.108899 11.304309  8.851804  9.522349 11.927426  7.009173
+##  [92] 13.778871  7.383097 11.933999  9.272749 10.743331  9.112928 12.667260
+##  [99]  8.547111 13.484741</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] -0.08746918</code></pre>
+<pre><code>## [1] 0.2346748</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -1.292</code></pre>
+<pre><code>## [1] -3.3465</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 18.5373</code></pre>
+<pre><code>## [1] -4.298916</code></pre>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
 <p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
