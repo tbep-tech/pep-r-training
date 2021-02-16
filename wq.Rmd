@@ -184,7 +184,7 @@ A different subset of years and selected year of interest can also be viewed by 
 show_boxpep(rawdat, param = 'chla', bay_segment = "Western", yrrng = c(2008, 2018), yrsel = 1990)
 ```
 
-The `show_thrpep()` function is useful to understand annual variation in chlorophyll and secchi depth relative to thresholds for each bay segment.  The information from these plots can provide an understanding of how the annual reporting outcomes are determined.  An outcome integer from zero to three is assigned to each bay segment for each annual estimate of chlorophyll and secchi depth.  These outcomes are based on both the exceedance of the annual estimate above the threshold (blue lines in `show_thrpep()`) and duration of the exceedance for the years prior.  The following graphic describes this logic [Janicki, Wade, and Pribble, 2000](https://drive.google.com/file/d/1XMULU8w4syWcSv_ciOUOhnC_G4xt6GIF/view).
+The `show_thrpep()` function is useful to understand annual variation in chlorophyll and secchi depth relative to thresholds for each bay segment.  The information from these plots can provide an understanding of how the annual reporting outcomes are determined.  An outcome integer from zero to three is assigned to each bay segment for each annual estimate of chlorophyll and secchi depth.  These outcomes are based on both the exceedance of the annual estimate above the threshold (blue lines in `show_thrpep()`) and duration of the exceedance for the years prior.  The following graphic describes this logic ([Janicki, Wade, and Pribble, 2000](https://drive.google.com/file/d/1XMULU8w4syWcSv_ciOUOhnC_G4xt6GIF/view)).
 
 ```{r, echo = F, fig.cap = 'Outcomes for annual estimates of water quality are assigned an integer value from zero to three depending on both magnitude and duration of the exceedence.', out.width = '80%'}
 knitr::include_graphics('figure/outints.png')
@@ -204,7 +204,7 @@ The final plotting function is `show_matrixpep()`, which creates an annual repor
 
 <span style="color:#FF3333; text-shadow: 0 0 3px #333;">__On Alert__</span>: Finalize development and implement appropriate management actions to get back on track.
 
-The management category or action is based on the combination of outcomes for chlorophyll and secchi depth [@Janicki99].
+The management category or action is based on the combination of outcomes for chlorophyll and secchi depth ([Janicki, Wade, and Pribble, 2000](https://drive.google.com/file/d/1XMULU8w4syWcSv_ciOUOhnC_G4xt6GIF/view)).
 
 ```{r, echo = F, fig.cap = 'Management action categories assigned to each bay segment and year based on chlorophyll and Secchi depth outcomes.', out.width = '80%'}
 knitr::include_graphics('figure/matrixcats.png')

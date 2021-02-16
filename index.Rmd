@@ -4,28 +4,30 @@
 
 ## Course objectives
 
-This course is designed to expose you to the fundamentals of using R for working with the [peptools](https://tbep-tech.github.io/peptools/index.html) R package.  We will also cover the basics of using R to work with enviornmental data. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
+This course is designed to expose you to the fundamentals of using R for working with the [peptools](https://tbep-tech.github.io/peptools/index.html) R package.  We will also cover the basics of using R if you are not familiar with the software. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
 
-* Understand R fundamentals
+* Use R for basic data analysis
 * Use the peptools package to read, analyze, and plot water quality data
 * Use the peptools package to read, analyze, and plot pathogens data
 * Use the peptools package to read, analyze, and plot dissolved oxygen data
 
 ## Agenda
 
-* __9:00 - 10:00__ R Basics
+__Tuesday, February 23rd, 2021__
+
+* __9:00 - 10:00__ [R Basics](rbasics.html)
 
   BREAK (10 min)
 
-* __10:20 - 11:00__ Water quality 
+* __10:10 - 11:00__ [Water quality](wq.html)
 
   BREAK (10 min)
   
-* __11:10 - 12:00__ Pathogens and DO
+* __11:10 - 12:00__ [Pathogens](pathogens.html) and [DO](do.html)
 
 ## Software requirements
 
-This trainings will use RStudio and R. Please make sure that you are ready to use the required software prior to the workshop.  __We will not be available for installation issues or questions on training days__.  There are two options for setup:
+This training will use RStudio and R. Please make sure that you are ready to use the required software prior to the workshop.  __We will not be available for installation issues or questions on the day of training__.  There are two options for setup:
 
 1. Use RStudio Cloud to access from a web browser following the [setup instructions](setupcloud.html). 
 

@@ -14,7 +14,7 @@ This URL is the link to all of the course materials hosted on RStudio Cloud as a
 
 You can [setup an account](https://login.rstudio.cloud/register?redirect=https%3A%2F%2Fclient.login.rstudio.cloud%2Foauth%2Flogin%3Fshow_auth%3D0%26show_login%3D1%26show_setup%3D1) for free using a login you create or through a third-party (Google or GitHub).  
 
-After your account is setup, you should a screen that looks something like this:
+After your account is setup, you should see a screen that looks something like this:
 
 ![](figure/tempproj.PNG#inline-img "temporary project")
 
@@ -22,4 +22,4 @@ After your account is setup, you should a screen that looks something like this:
 
 You'll see that this is a <b><span style="color:red">TEMPORARY PROJECT</span></b> under your account, so make sure to make it a permanent project by clicking the button on top.  This will save any changes you make to this project under your account. 
 
-This project includes all of the files for the course website, so there is a lot of stuff. For each training module, you'll want to pull up the appropriate R script to follow along (e.g., `R_Basics.R`).
+This project includes all of the files for the course website, so there is a lot of stuff. For each training module, you'll want to pull up the appropriate R script to follow along (e.g., `rbasics.R`).
