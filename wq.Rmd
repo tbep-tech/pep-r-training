@@ -9,8 +9,6 @@ library(pepreporting)
 library(tidyverse)
 library(mapview)
 library(lubridate)
-library(patchwork)
-library(sf)
 
 mptyps <- c("CartoDB.Positron", "CartoDB.DarkMatter", "OpenStreetMap", "Esri.WorldImagery", "OpenTopoMap")
 ```
