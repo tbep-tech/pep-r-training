@@ -24,6 +24,8 @@ my_random_sum
 ## remotes::install_github("remotes/peptools")
 
 library("tidyverse")
+library("readxl")
+library("mapview")
 library("peptools")
 
 ## # Using the help command/shortcut
