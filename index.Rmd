@@ -4,7 +4,7 @@
 
 ## Course objectives
 
-This course is designed to expose you to the fundamentals of using R for working with the [peptools](https://tbep-tech.github.io/peptools/index.html) R package.  We will also cover the basics of using R if you are not familiar with the software. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
+This course is designed to expose you to the fundamentals of using R for working with the [peptools](https://tbep-tech.github.io/peptools/index.html) R package developed for the [Peconic Estuary Program](https://www.peconicestuary.org/).  We will also cover the basics of using R if you are not familiar with the software. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
 
 * Use R for basic data analysis
 * Use the peptools package to read, analyze, and plot water quality data
