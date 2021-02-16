@@ -5,7 +5,7 @@ pkgs <- c("dplyr", "knitr")
 x<-lapply(pkgs, library, character.only = TRUE)
 opts_chunk$set(tidy = FALSE, message = F, warning = F)
 
-library(pepreporting)
+library(peptools)
 library(tidyverse)
 library(mapview)
 library(lubridate)
@@ -22,22 +22,22 @@ Get the lesson data: [download zip](data/data.zip)
 ## Lesson Outline
 
 - [Goals and motivation]
-- [pepreporting overview]
+- [peptools overview]
 - [Basic use]
 - [Plotting]
 
 ## Goals and motivation
 
-This module will provide you with background into the structure of the pepreporting R package and how to use functions in this package read, anaalyze, and plot water quality data indicators for the Peconic Estuary Program. You should be able to answer these questions at the end of this session:
+This module will provide you with background into the structure of the peptools R package and how to use functions in this package read, anaalyze, and plot water quality data indicators for the Peconic Estuary Program. You should be able to answer these questions at the end of this session:
 
-* What is the pepreporting package and how are the functions setup?
-* How can I use the pepreporting package to import water quality data? 
+* What is the peptools package and how are the functions setup?
+* How can I use the peptools package to import water quality data? 
 * What functions are available for summarizing water quality data?
 * What functions are available for plotting water quality data?
 
-## pepreporting overview
+## peptools overview
 
-The pepreporting package was developed as a set of functions to read, analyze, and plot water quality data relevant for the PEP.  the package source code lives on [GitHub](https://github.com/tbep-tech/pepreporting) and a [website](https://tbep-tech.github.io/pepreporting/) that includes function references and full documentation is also provided. The following shows all functions provided in pepreporting, organized by prefix. 
+The peptools package was developed as a set of functions to read, analyze, and plot water quality data relevant for the PEP.  the package source code lives on [GitHub](https://github.com/tbep-tech/peptools) and a [website](https://tbep-tech.github.io/peptools/) that includes function references and full documentation is also provided. The following shows all functions provided in peptools, organized by prefix. 
 
 #### Read
 
@@ -84,7 +84,7 @@ The pepreporting package was developed as a set of functions to read, analyze, a
 Before we use the package, we'll load it into our current R session as follows.  You should have already installed the package in the previous lesson. 
 
 ```{r, eval = F}
-library(pepreporting)
+library(peptools)
 ```
 
 The package includes a `pepstations` data object that includes metadata for each station, including lat/lon and bay segment.  
@@ -190,7 +190,7 @@ The `show_thrpep()` function is useful to understand annual variation in chlorop
 knitr::include_graphics('figure/outints.png')
 ```
 
-For the Peconic Estuary, light attenuation is replaced with Secchi depth. The outcomes above are assigned for both chlorophyll and secchi depth. The duration criteria are determined based on whether the exceedance was observed for years prior to the current year. The exceedance criteria for chlorophyll and light-attenuation are currently the same for each segment.  The pepreporting package contains a `peptargets` data file that is a reference for determining annual outcomes.  This file is loaded automatically with the package and can be viewed from the command line.
+For the Peconic Estuary, light attenuation is replaced with Secchi depth. The outcomes above are assigned for both chlorophyll and secchi depth. The duration criteria are determined based on whether the exceedance was observed for years prior to the current year. The exceedance criteria for chlorophyll and light-attenuation are currently the same for each segment.  The peptools package contains a `peptargets` data file that is a reference for determining annual outcomes.  This file is loaded automatically with the package and can be viewed from the command line.
 
 ```{r}
 peptargets

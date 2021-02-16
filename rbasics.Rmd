@@ -159,7 +159,7 @@ We're going to install some packages from CRAN that will give us the tools for o
 install.packages("tidyverse")
 install.packages("remotes")
 install.packages("mapview")
-remotes::install_github("remotes/pepreporting")
+remotes::install_github("remotes/peptools")
     ```
 
 1. Select all the lines by clicking and dragging the mouse pointer over the text.  
@@ -172,7 +172,7 @@ remotes::install_github("remotes/pepreporting")
 
     ```{r, message = F, warning = F, results = 'hide'}
 library("tidyverse")
-library("pepreporting")
+library("peptools")
     ```
 
 An important aspect of packages is that you only need to download them once, but every time you start RStudio you need to load them with the `library()` function.  Loading a package makes all of its functions available in your current R session.
@@ -346,4 +346,4 @@ View(enterodat)
 
 ## Summary
 
-In this lesson we learned about R and Rstudio, some of the basic syntax and data structures in R, and how to import files.  We've just imported some water quality and pathogen data from the Peconic Estuary that we'll continue to use for the rest of the workshop.  Next we'll learn how to process and plot these data using the pepreporting R package.
+In this lesson we learned about R and Rstudio, some of the basic syntax and data structures in R, and how to import files.  We've just imported some water quality and pathogen data from the Peconic Estuary that we'll continue to use for the rest of the workshop.  Next we'll learn how to process and plot these data using the peptools R package.

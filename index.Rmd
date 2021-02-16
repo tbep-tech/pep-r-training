@@ -4,12 +4,12 @@
 
 ## Course objectives
 
-This course is designed to expose you to the fundamentals of using R for working with the [pepreporting](https://tbep-tech.github.io/pepreporting/index.html) R package.  We will also cover the basics of using R to work with enviornmental data. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
+This course is designed to expose you to the fundamentals of using R for working with the [peptools](https://tbep-tech.github.io/peptools/index.html) R package.  We will also cover the basics of using R to work with enviornmental data. You will not be R experts by the end of the course, but you will have a solid foundation for continued learning.  By the end of this course you will be able to or have the resources to find out how to:
 
 * Understand R fundamentals
-* Use the pepreporting package to read, analyze, and plot water quality data
-* Use the pepreporting package to read, analyze, and plot pathogens data
-* Use the pepreporting package to read, analyze, and plot dissolved oxygen data
+* Use the peptools package to read, analyze, and plot water quality data
+* Use the peptools package to read, analyze, and plot pathogens data
+* Use the peptools package to read, analyze, and plot dissolved oxygen data
 
 ## Agenda
 

@@ -25,6 +25,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -81,7 +83,6 @@ h6 {
   text-align: left;
 }
 </style>
-
 
 
 
@@ -378,14 +379,14 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="Data_and_Resources.html">
-    <span class="fas fa-list"></span>
+    <span class="fa fa-list"></span>
      
     Data and resources
   </a>
 </li>
 <li>
   <a href="https://github.com/tbep-tech/pep-r-training">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -404,6 +405,376 @@ div.tocify {
 
 <div id="r-basics" class="section level1">
 <h1>R Basics</h1>
+<p>Get the lesson R script: <a href="R_Basics.R">R_Basics.R</a></p>
+<p>Get the lesson data: <a href="data/data.zip">download zip</a></p>
+<div id="lesson-outline" class="section level2">
+<h2>Lesson Outline</h2>
+<ul>
+<li><a href="#goals-and-motivation">Goals and Motivation</a></li>
+<li><a href="#rstudio">RStudio</a></li>
+<li><a href="#r-language-fundamentals">R language fundamentals</a></li>
+<li><a href="#data-structures-in-r">Data structures in R</a></li>
+<li><a href="#getting-your-data-into-r">Getting your data into R</a></li>
+</ul>
+</div>
+<div id="lesson-exercises" class="section level2">
+<h2>Lesson Exercises</h2>
+<ul>
+<li><a href="#exercise-1">Exercise 1</a></li>
+<li><a href="#exercise-2">Exercise 2</a></li>
+<li><a href="#exercise-3">Exercise 3</a></li>
+</ul>
+</div>
+<div id="goals-and-motivation" class="section level2">
+<h2>Goals and Motivation</h2>
+<p><a href="https://www.r-project.org/" target="_blank">R</a> is a language for statistical computing as well as a general purpose programming language. Increasingly, it has become one of the primary languages used in data science and for data analysis across many of the natural sciences.</p>
+<p>The goals of this training are to expose you to fundamentals and to develop an appreciation of what’s possible with this software. We also provide resources that you can use for follow-up learning on your own. You should be able to answer these questions at the end of this session:</p>
+<ul>
+<li>What is R and why should I use it?</li>
+<li>Why would I use RStudio?</li>
+<li>How can I write, save, and run scripts in RStudio?</li>
+<li>Where can I go for help?</li>
+<li>What are the basic data structures in R?</li>
+<li>How do I import data?</li>
+</ul>
+<div id="why-should-i-invest-time-in-r" class="section level3">
+<h3>Why should I invest time in R?</h3>
+<p>There are many programming languages available and each has it’s specific benefits. R was originally created as a statistical programming language but now it is largely viewed as a ‘data science’ language. Why would you invest time in learning R compared to other languages?</p>
+<ul>
+<li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/" target="_blank">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html" target="_blank">IEEE rating</a></li>
+</ul>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-16, there are 17064 supplemental packages for R on CRAN!</p>
+</div>
+</div>
+<div id="rstudio" class="section level2">
+<h2>RStudio</h2>
+<p>In the old days, the only way to use R was directly from the Console - this is a bare bones way of running R only with direct input of commands. Now, <a href="https://www.rstudio.com/" target="_blank">RStudio</a> is the go-to Interactive Development Environment (IDE) for R. Think of it like a car that is built around an engine. It is integrated with the console (engine) and includes many other features to improve the user’s experience, such as version control, debugging, dynamic documents, package manager and creation, and code highlighting and completion.</p>
+<p>Let’s get familiar with RStudio before we go on.</p>
+<div id="open-r-and-rstudio" class="section level3">
+<h3>Open R and RStudio</h3>
+<p>If you haven’t done so, download and install RStudio from the link above. After it’s installed, find the RStudio shortcut and fire it up (just watch for now). You should see something like this:</p>
+<p><img src="figure/rstudio.png" /></p>
+<p>There are four panes in RStudio:</p>
+<ul>
+<li><strong>Source</strong>: Your primary window for writing code to send to the console, this is where you write and save R “scripts”</li>
+<li><strong>Console</strong>: This is where code is executed in R - you should almost never write code here.</li>
+<li><strong>Environment, History, etc.</strong>: A tabbed window showing your working environment, code execution history, and other useful things</li>
+<li><strong>Files, plots, etc.</strong>: A tabbed window showing a file explorer, a plot window, list of installed packages, help files, and viewer</li>
+</ul>
+</div>
+<div id="scripting" class="section level3">
+<h3>Scripting</h3>
+<p>In most cases, you will not enter and execute code directly in the console. Code can be written in a script and then sent directly to the console when you’re ready to run it. The key difference here is that a script can be saved and shared.</p>
+<p>Open a new script from the File menu…</p>
+<p><img src="figure/rstudio_script.jpg" /></p>
+</div>
+<div id="executing-code-in-rstudio" class="section level3">
+<h3>Executing code in RStudio</h3>
+<p>After you write code in your script, it can be sent to the Console to run the code in R. Anything you write in the script will not be run or saved in R until it is sent to the console. There are two ways to do this. First, you can hit the <code>Run</code> button at the top right of the scripting window. Second, you can use <code>ctrl+enter</code> (<code>cmd+enter</code> on a Mac). Both approaches will send the selected line to the console, then move to the next line in your script. You can also highlight and send an entire block of code.</p>
+<p><img src="figure/rstudio_run.jpg" /></p>
+</div>
+</div>
+<div id="exercise-1" class="section level2">
+<h2>Exercise 1</h2>
+<p>This exercise will make sure R and RStudio are working and that you can get around the basics in RStudio.</p>
+<ol style="list-style-type: decimal">
+<li><p>Start RStudio if using a version you installed OR navigate to <a href="https://rstudio.cloud/project/1318333" target="_blank">https://rstudio.cloud/project/1318333</a> if using RStudio Cloud. To start both R and RStudio requires only firing up RStudio. RStudio should be available from All Programs at the Start Menu. Fire up RStudio.</p></li>
+<li><p>If you’re not using RStudio Cloud, create a new project (File menu, New project, New directory, New project, Directory Name…). Name it “r_workshop”. We will use this for the rest of the workshop.</p></li>
+<li><p>Create a new “R Script” in the Source Pane, save that file into your newly created project and name it “first_script.R”. It’ll just be a blank text file at this point.</p></li>
+<li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>.</p></li>
+<li><p>Lastly, we need to get this project set up with some example data for our exercises (if you’re using RStudio Cloud, ignore this step). You should have downloaded this already, but if not, the data are available <a href="data/data.zip">here</a>. The data are in a zipped folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
+</ol>
+</div>
+<div id="r-language-fundamentals" class="section level2">
+<h2>R language fundamentals</h2>
+<p>R is built around functions. These are commands that do specific things based on what you provide. The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
+<p>With the base install, you will gain access to many functions (2719, to be exact). Some examples:</p>
+<pre class="r"><code># print
+print(&#39;hello world!&#39;)</code></pre>
+<pre><code>## [1] &quot;hello world!&quot;</code></pre>
+<pre class="r"><code># sequence
+seq(1, 10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code># random numbers
+rnorm(100, mean = 10, sd = 2)</code></pre>
+<pre><code>##   [1]  7.507624 12.041557  7.915359  6.370466 10.939151  8.098522  9.328315 12.613716 11.608219  6.154916 11.857685  8.196851  6.911688  7.386069  9.043069
+##  [16] 12.243586  4.848819  8.879391 10.961947  7.697424 10.191079  8.943175 12.324235  6.492182  9.769272 11.866291  7.594809 10.991909  8.093622 13.510094
+##  [31]  8.711749  8.684384 10.658704 11.340292  7.817479  8.607707  9.932634  6.253082  9.105136 10.128050  9.199300 10.065564 12.813583 13.126634 13.445642
+##  [46] 11.690999 10.706635  8.686187 11.188282 10.508276 11.109086  8.591372  8.720358  7.336181 10.270555  8.509878  9.737829  9.841475  7.611486 10.928873
+##  [61]  8.584972  8.682435  8.801904 10.134154  7.709690  5.894820  8.872262  9.864099 12.227470  9.615115 10.167678 11.258416  9.820872 11.488981  9.535790
+##  [76]  7.243483  9.836886 10.884044 10.105404  8.408057 12.910092  9.869958 11.656583 11.146624  9.425244 14.166509  8.203350 16.281722 10.480419 11.217262
+##  [91]  9.170929  8.241927  7.862439  7.255609  9.185971 11.851306  5.755915  7.766012  9.479101 11.747050</code></pre>
+<pre class="r"><code># average 
+mean(rnorm(100))</code></pre>
+<pre><code>## [1] 0.04861786</code></pre>
+<pre class="r"><code># sum
+sum(rnorm(100))</code></pre>
+<pre><code>## [1] -1.455758</code></pre>
+<p>Very often you will see functions used like this:</p>
+<pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
+<p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
+<pre class="r"><code>my_random_sum</code></pre>
+<pre><code>## [1] -2.74866</code></pre>
+<div id="what-is-the-environment" class="section level3">
+<h3>What is the environment?</h3>
+<p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
+<p>With this, you have the very basics of how we write R code and save objects that can be used later.</p>
+</div>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<p>The base install of R is quite powerful, but you will soon have a need or desire to go beyond this. Packages provide this ability. They are a standardized way of extending R with new methods, techniques, and programming functionality. There is a lot to say about packages regarding finding them, using them, etc., but for now let’s focus just on the basics.</p>
+</div>
+<div id="cran" class="section level3">
+<h3>CRAN</h3>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-16, there are 17064 packages on CRAN!</p>
+</div>
+<div id="installing-packages" class="section level3">
+<h3>Installing packages</h3>
+<p>When a package gets installed, that means the source code is downloaded and put into your library. A default library location is set for you so no need to worry about that. In fact, on Windows most of this is pretty automatic. Let’s give it a shot.</p>
+</div>
+</div>
+<div id="exercise-2" class="section level2">
+<h2>Exercise 2</h2>
+<p>We’re going to install some packages from CRAN that will give us the tools for our workshop today. We’ll use the tidyverse, sf, and mapview packages. Later, we’ll explain in detail what each of these packages provide. Again, if you are using RStudio Cloud, these packages will already be installed. You can skip to step 5 in this case.</p>
+<ol style="list-style-type: decimal">
+<li><p>At the top of the script you just created, type the following functions.</p>
+<pre class="r"><code># install packages from CRAN
+install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;remotes&quot;)
+install.packages(&quot;mapview&quot;)
+remotes::install_github(&quot;remotes/peptools&quot;)</code></pre></li>
+<li><p>Select all the lines by clicking and dragging the mouse pointer over the text.</p></li>
+<li><p>Send all the commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
+<li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
+<li><p>Load the packages after they’ve installed.</p>
+<pre class="r"><code>library(&quot;tidyverse&quot;)
+library(&quot;peptools&quot;)</code></pre></li>
+</ol>
+<p>An important aspect of packages is that you only need to download them once, but every time you start RStudio you need to load them with the <code>library()</code> function. Loading a package makes all of its functions available in your current R session.</p>
+<div id="getting-help" class="section level3">
+<h3>Getting Help</h3>
+<p>Being able to find help and interpret that help is probably one of the most important skills for learning a new language. R is no different. Help on functions and packages can be accessed directly from R, can be found on CRAN and other official R resources, searched on Google, found on StackOverflow, or from any number of fantastic online resources. I will cover a few of these here.</p>
+</div>
+<div id="help-from-the-console" class="section level3">
+<h3>Help from the console</h3>
+<p>Getting help from the console is straightforward and can be done numerous ways.</p>
+<pre class="r"><code># Using the help command/shortcut
+# When you know the name of a function
+help(&quot;print&quot;) # Help on the print command
+?print # Help on the print command using the `?` shortcut
+
+# When you know the name of the package
+help(package = &quot;sf&quot;) # Help on the package `dplyr`
+
+# Don&#39;t know the exact name or just part of it
+apropos(&quot;print&quot;) # Returns all available functions with &quot;print&quot; in the name
+??print # shortcut, but also searches demos and vignettes in a formatted page</code></pre>
+</div>
+<div id="official-r-resources" class="section level3">
+<h3>Official R Resources</h3>
+<p>In addition to help from within R itself, CRAN and the R-Project have many resources available for support. Two of the most notable are the mailing lists and the <a href="http://cran.r-project.org/web/views/" target="_blank">task views</a>.</p>
+<ul>
+<li><a href="https://stat.ethz.ch/mailman/listinfo/r-help" target="_blank">R Help Mailing List</a>: The main mailing list for R help. Can be a bit daunting and some (although not most) senior folks can be, um, curmudgeonly…</li>
+<li><a href="https://stat.ethz.ch/mailman/listinfo/r-sig-ecology" target="_blank">R-sig-ecology</a>: A special interest group for use of R in ecology. Less daunting than the main help with participation from some big names in ecological modelling and statistics (e.g., Ben Bolker, Gavin Simpson, and Phil Dixon).</li>
+<li><a href="http://cran.r-project.org/web/views/Environmetrics.html" target="_blank">Environmetrics Task View</a>: Task views are great in that they provide an annotated list of packages relevant to a particular field. This one is maintained by Gavin Simpson and has great info on packages relevant to the environmental sciences.</li>
+<li><a href="http://cran.r-project.org/web/views/Spatial.html" target="_blank">Spatial Analysis Task View</a>: One I use a lot that lists all the relevant packages for spatial analysis, GIS, and Remote Sensing in R.</li>
+</ul>
+</div>
+<div id="google-and-stackoverflow" class="section level3">
+<h3>Google and StackOverflow</h3>
+<p>While the resources already mentioned are useful, often the quickest way is to just turn to Google. However, a search for “R” is a bit challenging. A few ways around this. Google works great if you search for a given package or function name. You can also search for mailing lists directly (i.e. “R-sig-geo”), although Google often finds results from these sources.</p>
+<p>Blind googling can require a bit of strategy to get the info you want. Some pointers:</p>
+<ul>
+<li>Always preface the search with “r”</li>
+<li>Understand which sources are reliable</li>
+<li>Take note of the number of hits and date of a web page</li>
+<li>When in doubt, search with the exact error message (see here for <a href="https://cran.r-project.org/doc/manuals/R-lang.html#Exception-handling" target="_blank">details</a> about warnings vs errors)</li>
+</ul>
+<p>One specific resource that I use quite a bit is <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">StackOverflow with the ‘r’ tag</a>. StackOverflow is a discussion forum for all things related to programming. You can then use this tag and the search functions in StackOverflow and find answers to almost anything you can think of. However, these forums are also very strict and I typically use them to find answers, not to ask questions.</p>
+</div>
+<div id="other-resources" class="section level3">
+<h3>Other Resources</h3>
+<p>As I mentioned earlier, there are TOO many resources to list here and everyone has their favorites. Below are just a few that I like.</p>
+<ul>
+<li><a href="http://rforcats.net/" target="_blank">R For Cats</a>: Basic introduction site, meant to be a gentle and light-hearted introduction</li>
+<li><a href="https://r4ds.had.co.nz/" target="_blank">R for Data Science</a>: My favorite resource for learning data science methods with R, focusing on the tidyverse. Much of the content in this training is adapted from this book.</li>
+<li><a href="http://adv-r.had.co.nz/" target="_blank">Advanced R</a>: Web home of Hadley Wickham’s book, the same author of R for Data Science. Gets into more advanced topics, but also covers the basics in a great way.</li>
+<li><a href="http://cran.r-project.org/doc/contrib/Short-refcard.pdf" target="_blank">CRAN Cheatsheets</a>: A good cheat sheet from the official source</li>
+<li><a href="http://www.rstudio.com/resources/cheatsheets/" target="_blank">RStudio Cheatsheets</a>: Additional cheat sheets from RStudio. I am especially fond of the data wrangling one.</li>
+</ul>
+</div>
+</div>
+<div id="data-structures-in-r" class="section level2">
+<h2>Data structures in R</h2>
+<p>Now that you know how to get started in R and where to find resources, we can begin talking about R data structures. Simply put, a data structure is a way for programming languages to handle information storage.</p>
+<p>There is a bewildering amount of formats for storing data and R is no exception. Understanding the basic building blocks that make up data types is essential. All functions in R require specific types of input data and the key to using functions is knowing how these types relate to each other.</p>
+<div id="vectors-one-dimensional-data" class="section level3">
+<h3>Vectors (one-dimensional data)</h3>
+<p>The basic data format in R is a vector - a one-dimensional grouping of elements that have the same type. These are all vectors and they are created with the <code>c</code> function:</p>
+<pre class="r"><code>dbl_var &lt;- c(1, 2.5, 4.5)
+int_var &lt;- c(1L, 6L, 10L)
+log_var &lt;- c(TRUE, FALSE, T, F)
+chr_var &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</code></pre>
+<p>The four types of atomic vectors (think atoms that make up a molecule aka vector) are <code>double</code> (or numeric), <code>integer</code>, <code>logical</code>, and <code>character</code>. For most purposes you can ignore the <code>integer</code> class, so there are basically three types. Each type has some useful properties:</p>
+<pre class="r"><code>class(dbl_var)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>length(log_var)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>These properties are useful for not only describing an object, but they define limits on which functions or types of operations that can be used. That is, some functions require a character string input while others require a numeric input. Similarly, vectors of different types or properties may not play well together. Let’s look at some examples:</p>
+<pre class="r"><code># taking the mean of a character vector
+mean(chr_var)
+
+# adding two numeric vectors of different lengths
+vec1 &lt;- c(1, 2, 3, 4)
+vec2 &lt;- c(2, 3, 5)
+vec1 + vec2</code></pre>
+</div>
+<div id="dimensional-data" class="section level3">
+<h3>2-dimensional data</h3>
+<p>A collection of vectors represented as one data object are often described as two-dimensional data, or in R speak, a data frame (i.e., <code>data.frame()</code>). Think of them like your standard spreadsheet, where each column describes a variable (vector) and rows link observations between columns. Here’s a simple example:</p>
+<pre class="r"><code>ltrs &lt;- c(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)
+nums &lt;- c(1, 2, 3)
+logs &lt;- c(T, F, T)
+mydf &lt;- data.frame(ltrs, nums, logs)
+mydf</code></pre>
+<pre><code>##   ltrs nums  logs
+## 1    a    1  TRUE
+## 2    b    2 FALSE
+## 3    c    3  TRUE</code></pre>
+<p>The only constraints required to make a data frame are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Each column (vector) contains the same type of data</p></li>
+<li><p>The number of observations in each column is equal.</p></li>
+</ol>
+</div>
+</div>
+<div id="getting-your-data-into-r" class="section level2">
+<h2>Getting your data into R</h2>
+<p>It is the rare case when you manually enter your data in R, not to mention impractical for most datasets. Most data analysis workflows typically begin with importing a dataset from an external source. Literally, this means committing a dataset to memory (i.e., storing it as a variable) as one of R’s data structure formats.</p>
+<p>Flat data files (text only, rectangular format) present the least complications on import because there is very little to assume about the structure of the data. On import, R tries to guess the data type for each column and this is fairly unambiguous with flat files. We’ll be using <code>read_csv()</code> function from the readr package that comes with the tidyverse.</p>
+</div>
+<div id="the-working-directory" class="section level2">
+<h2>The working directory</h2>
+<p>Before we import data, we need to talk about the “working directory”. Whenever RStudio is opened, it uses a file location on your computer to access and save data. If you’re using an RStudio project, the working directory will be the folder where you created the project. If not, it is probably the the user’s home directory (e.g., <code>C:/Users/Marcus</code>), which you’ll want to change to where you have your data.</p>
+<p>You can see your working directory with the <code>getwd()</code> function or from the file path at the top of the console in RStudio. All files in the File pane window on the bottom right of RStudio are also those within the working directory. If you want to change your working directory, you can use the <code>setwd()</code> function and put the file path (as a character string) inside the function, e.g., <code>setwd('C:/Users/Marcus/Desktop/newdirectory')</code>.</p>
+<p>The working directory is important to know when you’re importing or exporting data. When you import data, a <em>relative</em> file path can be used that is an extension of the working directory. For example, if your working directory is <code>'C:/Users/Marcus/Desktop'</code> and you have a file called <code>mydata.csv</code> in that directory, you can use <code>read_csv('mydata.csv')</code> to import the file. Alternatively, if there’s a folder called “data” in your working directory with the file you want to import, you would use <code>read_csv('data/mydata.csv')</code>.</p>
+<p>If you want to import a file that is not in your working directory, you will have to use an <em>absolute</em> path that is the full file location. Otherwise, R will not know where to look outside of the working directory.</p>
+</div>
+<div id="exercise-3" class="section level2">
+<h2>Exercise 3</h2>
+<p>Now that we have the data downloaded and extracted to our data folder, we’ll use <code>read_csv</code> to import two files into our environment. The <code>read_csv</code> function comes with the tidyverse package, so make sure that package is loaded (i.e., <code>library(tidyverse)</code>) before you do this exercise. This should have been done in the second exercise.</p>
+<ol style="list-style-type: decimal">
+<li><p>Type the following in your script. Note the use of <em>relative</em> file paths within your project (see the explanation above).</p>
+<pre class="r"><code>library(readxl)
+rawdat &lt;- read_excel(&#39;data/currentdata.xlsx&#39;)
+enterodat &lt;- read_excel(&#39;data/enterodata.xlsx&#39;)</code></pre></li>
+<li><p>Send the commands to the console with <code>ctrl+enter</code>.</p></li>
+<li><p>Verify that the data imported correctly by viewing the first six rows of each dataset. Use the <code>head()</code> function directly in the console, e.g., <code>head(fishdat)</code> or <code>head(statloc)</code></p></li>
+</ol>
+<p>Let’s explore the datasets a bit. There are many useful functions for exploring the characteristics of a dataset. This is always a good idea when you first import something.</p>
+<pre class="r"><code># get the dimensions
+dim(rawdat)</code></pre>
+<pre><code>## [1] 33978    41</code></pre>
+<pre class="r"><code>dim(enterodat)</code></pre>
+<pre><code>## [1] 36231     7</code></pre>
+<pre class="r"><code># get the column names
+names(rawdat)</code></pre>
+<pre><code>##  [1] &quot;Date&quot;                         &quot;Time&quot;                         &quot;BayStation&quot;                   &quot;Diurnal&quot;                      &quot;Location&quot;                    
+##  [6] &quot;Replicate&quot;                    &quot;Depth&quot;                        &quot;Secchi&quot;                       &quot;Temp&quot;                         &quot;D.O.&quot;                        
+## [11] &quot;Sal&quot;                          &quot;Cond&quot;                         &quot;pH&quot;                           &quot;T Coliform&quot;                   &quot;F Coliform&quot;                  
+## [16] &quot;NH3&quot;                          &quot;NO2&quot;                          &quot;NO3&quot;                          &quot;Nox&quot;                          &quot;Urea&quot;                        
+## [21] &quot;TKN&quot;                          &quot;DKN&quot;                          &quot;TN&quot;                           &quot;DN&quot;                           &quot;Total Phosphate&quot;             
+## [26] &quot;Dissolved Phosphate&quot;          &quot;TP&quot;                           &quot;DP&quot;                           &quot;o-PO4&quot;                        &quot;TOC&quot;                         
+## [31] &quot;DOC&quot;                          &quot;Silicates&quot;                    &quot;Chloride&quot;                     &quot;Sulfate&quot;                      &quot;TSS&quot;                         
+## [36] &quot;Chlorophyll A - Total&quot;        &quot;Chlorophyll A - Fractionated&quot; &quot;Aureo&quot;                        &quot;Tide&quot;                         &quot;Weather&quot;                     
+## [41] &quot;Water Color&quot;</code></pre>
+<pre class="r"><code>names(enterodat)</code></pre>
+<pre><code>## [1] &quot;Beach_EPA_ID&quot;   &quot;Name&quot;           &quot;FieldNum&quot;       &quot;ColDate&quot;        &quot;Time&quot;           &quot;Waterbody_Area&quot; &quot;Result&quot;</code></pre>
+<pre class="r"><code># see the first six rows
+head(rawdat)</code></pre>
+<pre><code>## # A tibble: 6 x 41
+##   Date                Time                BayStation Diurnal Location Replicate Depth Secchi  Temp  D.O.   Sal Cond  pH    `T Coliform` `F Coliform` NH3   NO2  
+##   &lt;dttm&gt;              &lt;dttm&gt;                   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;
+## 1 1976-07-20 00:00:00 1899-12-31 07:00:00      60100 A       &lt;NA&gt;     &lt;NA&gt;         10     NA  21.8   6.8  28.3 NA    NA    &lt;NA&gt;         &lt;NA&gt;         &lt; 0.~ 2E-3 
+## 2 1976-07-20 00:00:00 1899-12-31 13:20:00      60100 P       &lt;NA&gt;     &lt;NA&gt;         12      6  23.8   7.3  28.2 NA    NA    &lt; 3          &lt; 3          2E-3  2E-3 
+## 3 1976-07-20 00:00:00 1899-12-31 06:10:00      60110 A       &lt;NA&gt;     &lt;NA&gt;         23      5  22.4   6.8  28.4 NA    NA    &lt; 3          &lt; 3          &lt; 0.~ 2E-3 
+## 4 1976-07-20 00:00:00 1899-12-31 06:25:00      60110 A       &lt;NA&gt;     R            23      5  22.4   6.6  28.4 NA    NA    &lt; 3          &lt; 3          3.00~ 2E-3 
+## 5 1976-07-20 00:00:00 1899-12-31 13:00:00      60110 P       &lt;NA&gt;     &lt;NA&gt;         22      6  23.8   7.3  28.4 NA    NA    &lt; 3          &lt; 3          5.00~ 2E-3 
+## 6 1976-07-20 00:00:00 1899-12-31 13:10:00      60110 P       &lt;NA&gt;     R            22      6  23.8   7.7  28.4 NA    NA    93           &lt; 3          6.00~ 2E-3 
+## # ... with 24 more variables: NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;, TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, `Total Phosphate` &lt;dbl&gt;, `Dissolved Phosphate` &lt;dbl&gt;,
+## #   TP &lt;lgl&gt;, DP &lt;lgl&gt;, `o-PO4` &lt;dbl&gt;, TOC &lt;lgl&gt;, DOC &lt;lgl&gt;, Silicates &lt;lgl&gt;, Chloride &lt;lgl&gt;, Sulfate &lt;lgl&gt;, TSS &lt;lgl&gt;, `Chlorophyll A - Total` &lt;dbl&gt;,
+## #   `Chlorophyll A - Fractionated` &lt;lgl&gt;, Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, `Water Color` &lt;lgl&gt;</code></pre>
+<pre class="r"><code>head(enterodat)</code></pre>
+<pre><code>## # A tibble: 6 x 7
+##   Beach_EPA_ID Name                               FieldNum ColDate             Time                Waterbody_Area Result
+##   &lt;lgl&gt;        &lt;chr&gt;                              &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;lgl&gt;          &lt;chr&gt; 
+## 1 NA           Bayport Beach                      I10      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 2 NA           Sayville Marina Park Beach         I11      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 3 NA           Bayberry Beach &amp; Tennis Club Beach I27      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 4 NA           East Islip Beach                   I4       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             4     
+## 5 NA           Islip Beach                        I3       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             12    
+## 6 NA           Benjamin Beach                     I2       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             8</code></pre>
+<pre class="r"><code># get the overall structure
+str(rawdat)</code></pre>
+<pre><code>## tibble [33,978 x 41] (S3: tbl_df/tbl/data.frame)
+##  $ Date                        : POSIXct[1:33978], format: &quot;1976-07-20&quot; &quot;1976-07-20&quot; &quot;1976-07-20&quot; &quot;1976-07-20&quot; ...
+##  $ Time                        : POSIXct[1:33978], format: &quot;1899-12-31 07:00:00&quot; &quot;1899-12-31 13:20:00&quot; &quot;1899-12-31 06:10:00&quot; &quot;1899-12-31 06:25:00&quot; ...
+##  $ BayStation                  : num [1:33978] 60100 60100 60110 60110 60110 ...
+##  $ Diurnal                     : chr [1:33978] &quot;A&quot; &quot;P&quot; &quot;A&quot; &quot;A&quot; ...
+##  $ Location                    : chr [1:33978] NA NA NA NA ...
+##  $ Replicate                   : chr [1:33978] NA NA NA &quot;R&quot; ...
+##  $ Depth                       : num [1:33978] 10 12 23 23 22 22 NA NA 22 NA ...
+##  $ Secchi                      : num [1:33978] NA 6 5 5 6 6 NA NA 4 NA ...
+##  $ Temp                        : num [1:33978] 21.8 23.8 22.4 22.4 23.8 23.8 23 23 22.8 23.4 ...
+##  $ D.O.                        : num [1:33978] 6.8 7.3 6.8 6.6 7.3 7.7 7.1 7 7.2 6.3 ...
+##  $ Sal                         : num [1:33978] 28.3 28.2 28.4 28.4 28.4 ...
+##  $ Cond                        : logi [1:33978] NA NA NA NA NA NA ...
+##  $ pH                          : logi [1:33978] NA NA NA NA NA NA ...
+##  $ T Coliform                  : chr [1:33978] NA &quot;&lt; 3&quot; &quot;&lt; 3&quot; &quot;&lt; 3&quot; ...
+##  $ F Coliform                  : chr [1:33978] NA &quot;&lt; 3&quot; &quot;&lt; 3&quot; &quot;&lt; 3&quot; ...
+##  $ NH3                         : chr [1:33978] &quot;&lt; 0.002&quot; &quot;2E-3&quot; &quot;&lt; 0.002&quot; &quot;3.0000000000000001E-3&quot; ...
+##  $ NO2                         : chr [1:33978] &quot;2E-3&quot; &quot;2E-3&quot; &quot;2E-3&quot; &quot;2E-3&quot; ...
+##  $ NO3                         : chr [1:33978] &quot;&lt; 0.002&quot; &quot;&lt; 0.002&quot; &quot;&lt; 0.002&quot; &quot;&lt; 0.002&quot; ...
+##  $ Nox                         : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Urea                        : logi [1:33978] NA NA NA NA NA NA ...
+##  $ TKN                         : chr [1:33978] &quot;0.1&quot; &quot;0.3&quot; &quot;0.1&quot; &quot;&lt; 0.1&quot; ...
+##  $ DKN                         : chr [1:33978] NA NA NA NA ...
+##  $ TN                          : logi [1:33978] NA NA NA NA NA NA ...
+##  $ DN                          : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Total Phosphate             : num [1:33978] 0.091 0.096 0.087 0.085 0.091 0.091 NA NA 0.096 NA ...
+##  $ Dissolved Phosphate         : num [1:33978] 0.061 0.073 0.06 0.063 0.067 0.069 NA NA 0.061 NA ...
+##  $ TP                          : logi [1:33978] NA NA NA NA NA NA ...
+##  $ DP                          : logi [1:33978] NA NA NA NA NA NA ...
+##  $ o-PO4                       : num [1:33978] NA NA NA NA NA NA NA NA NA NA ...
+##  $ TOC                         : logi [1:33978] NA NA NA NA NA NA ...
+##  $ DOC                         : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Silicates                   : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Chloride                    : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Sulfate                     : logi [1:33978] NA NA NA NA NA NA ...
+##  $ TSS                         : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Chlorophyll A - Total       : num [1:33978] NA 3.3 8.6 4.9 5.1 3.7 NA NA 3.7 NA ...
+##  $ Chlorophyll A - Fractionated: logi [1:33978] NA NA NA NA NA NA ...
+##  $ Aureo                       : num [1:33978] NA NA NA NA NA NA NA NA NA NA ...
+##  $ Tide                        : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Weather                     : logi [1:33978] NA NA NA NA NA NA ...
+##  $ Water Color                 : logi [1:33978] NA NA NA NA NA NA ...</code></pre>
+<pre class="r"><code>str(enterodat)</code></pre>
+<pre><code>## tibble [36,231 x 7] (S3: tbl_df/tbl/data.frame)
+##  $ Beach_EPA_ID  : logi [1:36231] NA NA NA NA NA NA ...
+##  $ Name          : chr [1:36231] &quot;Bayport Beach&quot; &quot;Sayville Marina Park Beach&quot; &quot;Bayberry Beach &amp; Tennis Club Beach&quot; &quot;East Islip Beach&quot; ...
+##  $ FieldNum      : chr [1:36231] &quot;I10&quot; &quot;I11&quot; &quot;I27&quot; &quot;I4&quot; ...
+##  $ ColDate       : POSIXct[1:36231], format: &quot;2020-05-18&quot; &quot;2020-05-18&quot; &quot;2020-05-18&quot; &quot;2020-05-18&quot; ...
+##  $ Time          : POSIXct[1:36231], format: &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; ...
+##  $ Waterbody_Area: logi [1:36231] NA NA NA NA NA NA ...
+##  $ Result        : chr [1:36231] &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;4&quot; ...</code></pre>
+<p>You can also view each dataset in a spreadsheet style in the scripting window:</p>
+<pre class="r"><code>View(rawdat)
+View(enterodat)</code></pre>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>In this lesson we learned about R and Rstudio, some of the basic syntax and data structures in R, and how to import files. We’ve just imported some water quality and pathogen data from the Peconic Estuary that we’ll continue to use for the rest of the workshop. Next we’ll learn how to process and plot these data using the peptools R package.</p>
+</div>
 </div>
 
 

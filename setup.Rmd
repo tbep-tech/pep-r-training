@@ -92,7 +92,7 @@ Install packages available for all R users from [CRAN](https://cran.r-project.or
 
 ```r
 install.packages(c("tidyverse", "mapview", "remotes"))
-remotes::install_github("tbep-tech/pepreporting")
+remotes::install_github("tbep-tech/peptools")
 ```
 
 If you see something like this:
