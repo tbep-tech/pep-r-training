@@ -25,8 +25,6 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -83,6 +81,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -379,14 +378,14 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="Data_and_Resources.html">
-    <span class="fa fa-list"></span>
+    <span class="fas fa-list"></span>
      
     Data and resources
   </a>
 </li>
 <li>
   <a href="https://github.com/tbep-tech/pep-r-training">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -405,6 +404,100 @@ div.tocify {
 
 <div id="dissolved-oxygen" class="section level1">
 <h1>Dissolved oxygen</h1>
+<p>Get the lesson R script: <a href="do.R">do.R</a></p>
+<div id="lesson-outline" class="section level2">
+<h2>Lesson Outline</h2>
+<ul>
+<li><a href="#goals-and-motivation">Goals and motivation</a></li>
+<li><a href="#importing-do-data">Importing DO data</a></li>
+<li><a href="#summarizing-do-data">Summarizing DO data</a></li>
+<li><a href="#plotting-do-data">Plotting DO data</a></li>
+</ul>
+</div>
+<div id="goals-and-motivation" class="section level2">
+<h2>Goals and motivation</h2>
+<p>This module will provide you with background on how to use the peptools R package to import, summarize, and plot dissolved oxygen data. You should be able to answer these questions at the end of this session:</p>
+<ul>
+<li>How can I use the peptools package to import dissolved oxygen data?</li>
+<li>How does the peptools package summarize dissolved oxygen data for reporting?</li>
+<li>What functions are available for summarizing dissolved oxygen data?</li>
+<li>What functions are available for plotting dissolved oxygen data?</li>
+</ul>
+</div>
+<div id="importing-do-data" class="section level2">
+<h2>Importing DO data</h2>
+<p>Two continuous USGS monitoring stations collect DO data at locations in the Peconic Estuary: USGS stations 01304562 in the Peconic River and 01304200 in Orient Harbor. Data at these stations can be downloaded using the <code>read_pepdo()</code> function.</p>
+<pre class="r"><code>exdat &lt;- read_pepdo(site = c(&#39;01304562&#39;, &#39;01304200&#39;), nms = c(&#39;Peconic R.&#39;, &#39;Orient Harbor&#39;), startDate = &#39;2020-06-01&#39;, endDate = &#39;2020-06-30&#39;)</code></pre>
+<p>The <code>dodat</code> data object included with the package provides DO data from 2013 to 2020 at the two sites. This takes several minutes to download using the <code>read_pepdo()</code> function, so it is included with the package for ease of use.</p>
+<pre class="r"><code>head(dodat)</code></pre>
+<pre><code>##            site            DateTime do_mgl
+## 1 Orient Harbor 2013-01-01 00:00:00   11.2
+## 2 Orient Harbor 2013-01-01 00:06:00   11.2
+## 3 Orient Harbor 2013-01-01 00:12:00   11.2
+## 4 Orient Harbor 2013-01-01 00:18:00   11.2
+## 5 Orient Harbor 2013-01-01 00:24:00   11.2
+## 6 Orient Harbor 2013-01-01 00:30:00   11.2</code></pre>
+</div>
+<div id="summarizing-do-data" class="section level2">
+<h2>Summarizing DO data</h2>
+<p>Dissolved oxygen data typically show daily and seasonal variation. Summaries of condition should account for variation at both temporal scales. Further, the impact of low dissolved oxygen concentrations on biota can vary depending on both magnitude and duration of hypoxia/anoxia. As such, condition assessment could also consider how often concentrations fall below a thresholds and for how long. The assessments below speak to each of these needs.</p>
+<p>First, the data can be summarized from the continuous (~6 minute observations) to daily averages using the <code>anlz_dodlpep()</code> function. A user-specified threshold can be supplied to the <code>thr</code> argument to summarize the data relative to a value of interest, the default value being the acute threshold of 3 mg/L (an alternative may be the chronic threshold of 4.8 mg/L, <a href="Ambient%20aquatic%20life%20water%20quality%20criteria%20for%20dissolved%20oxygen%20(saltwater):%20Cape%20Cod%20to%20Cape%20Hatteras">USEPA 2000</a>).</p>
+<pre class="r"><code># 3 mg/l is acute, 4.8 mg/l is chronic
+dlysum &lt;- anlz_dodlypep(dodat, thr = 3)
+dlysum</code></pre>
+<pre><code>## [90m# A tibble: 5,338 x 7[39m
+##    site          Date          yr    mo do_mgl below below_cumsum
+##    [3m[90m&lt;fct&gt;[39m[23m         [3m[90m&lt;date&gt;[39m[23m     [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m
+## [90m 1[39m Peconic River 2013-01-01  [4m2[24m013     1   11.0     0            0
+## [90m 2[39m Peconic River 2013-01-02  [4m2[24m013     1   11.3     0            0
+## [90m 3[39m Peconic River 2013-01-03  [4m2[24m013     1   11.6     0            0
+## [90m 4[39m Peconic River 2013-01-04  [4m2[24m013     1   11.6     0            0
+## [90m 5[39m Peconic River 2013-01-05  [4m2[24m013     1   11.7     0            0
+## [90m 6[39m Peconic River 2013-01-06  [4m2[24m013     1   11.8     0            0
+## [90m 7[39m Peconic River 2013-01-07  [4m2[24m013     1   12.0     0            0
+## [90m 8[39m Peconic River 2013-01-08  [4m2[24m013     1   12.1     0            0
+## [90m 9[39m Peconic River 2013-01-09  [4m2[24m013     1   12.0     0            0
+## [90m10[39m Peconic River 2013-01-10  [4m2[24m013     1   11.7     0            0
+## [90m# ... with 5,328 more rows[39m</code></pre>
+<p>The last three columns show the daily summarized data. The <code>do_mgl</code> column shows the average DO concentration for each day, the <code>below</code> column shows a 1 (yes) or 0 (no) if the concentration was below the threshold value at any point during a day, and the <code>below_cumsum</code> column shows a cumulative tally of the number of days in each month at which dissolved oxygen fell below the threshold at any point during a day.</p>
+<p>The data can also be summarized by month using the <code>anlz_domopep()</code> function. Summarizing by month distills the information into a simple format for plotting. Internally, the <code>anlz_domopep()</code> function uses the <code>anlz_dodlypep()</code> function to first summarize results by day, which are then summarized by month.</p>
+<pre class="r"><code>mosum &lt;- anlz_domopep(dodat, thr = 3)
+mosum</code></pre>
+<pre><code>## [90m# A tibble: 189 x 6[39m
+##    site             yr mo    do_mgl below_ave below_maxrun
+##  [90m*[39m [3m[90m&lt;fct&gt;[39m[23m         [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;ord&gt;[39m[23m  [3m[90m&lt;dbl&gt;[39m[23m     [3m[90m&lt;dbl&gt;[39m[23m        [3m[90m&lt;dbl&gt;[39m[23m
+## [90m 1[39m Peconic River  [4m2[24m013 Jan    11.6      0                0
+## [90m 2[39m Peconic River  [4m2[24m013 Feb    11.9      0                0
+## [90m 3[39m Peconic River  [4m2[24m013 Mar    11.7      0                0
+## [90m 4[39m Peconic River  [4m2[24m013 Apr     9.55     0                0
+## [90m 5[39m Peconic River  [4m2[24m013 May     7.90     0                0
+## [90m 6[39m Peconic River  [4m2[24m013 Jun     5.73     0.3              5
+## [90m 7[39m Peconic River  [4m2[24m013 Jul     3.12     1               27
+## [90m 8[39m Peconic River  [4m2[24m013 Aug     3.13     1               24
+## [90m 9[39m Peconic River  [4m2[24m013 Sep     4.81     0.655            6
+## [90m10[39m Peconic River  [4m2[24m013 Oct     6.03     0.348            7
+## [90m# ... with 179 more rows[39m</code></pre>
+<p>The last three columns show the monthly summarized data, where <code>do_mgl</code> is the average of all daily DO averages across the month, <code>below_ave</code> is the proportion of days in a month when concentrations in a given day fell below the threshold (1 would mean all days had an instance of DO below the threshold, 0 would mean none), and <code>below_maxrun()</code> is the maximum number of sequential days in a month when concentrations in a given day fell below the threshold (30 or 31, depending on month, would indicate all days in a month had an instance of DO below the threshold).</p>
+<p>The <code>below_ave</code> and <code>below_maxrun</code> columns summarize the DO data differently depending on how hypoxia/anoxia conditions can be described relative to potential impacts on biological resources. The <code>below_ave</code> column summarizes undersaturation relative to only the number of times hypoxia conditions occurred, whereas the <code>below_maxrun</code> column summarizes undersaturation relative to both the number of instances and duration of hypoxia. In other words, biota may be stressed differently depending on the number of times hypoxia occurs vs how long it may persist. The two measures may indicate similar information, but not always depending on characteristics of the DO time series.</p>
+</div>
+<div id="plotting-do-data" class="section level2">
+<h2>Plotting DO data</h2>
+<p>The summarized monthly data can be plotted with the <code>show_domatrix()</code> function. In this example, the default plot shows the proportion of days in a month when concentrations in a given day fell below a threshold of 3 mg/L.</p>
+<pre class="r"><code>show_domatrix(dodat, thr = 3, show = &#39;below_ave&#39;)</code></pre>
+<p><img src="do_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
+<p>The maximum number of sequential days in a month when concentrations in a given day fell below the threshold can also be plotted by changing the <code>show</code> argument.</p>
+<pre class="r"><code>show_domatrix(dodat, thr = 3, show = &#39;below_maxrun&#39;)</code></pre>
+<p><img src="do_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
+<p>The threshold can also be changed. For example, the chronic threshold of 4.8 mg/L shows conditions relative to a more conservative threshold.</p>
+<pre class="r"><code>show_domatrix(dodat, thr = 4.8, show = &#39;below_ave&#39;)</code></pre>
+<p><img src="do_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
+<p>Plotting the results provides insights into hypoxia patterns at the site depending on how under-saturated conditions were summarized. Additional considerations may include:</p>
+<ol style="list-style-type: decimal">
+<li>Relevance of a threshold to biological indicator</li>
+<li>Spatial extent of the indicators</li>
+<li>Breakpoints for management decisions</li>
+</ol>
+</div>
 </div>
 
 
