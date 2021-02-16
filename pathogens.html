@@ -435,49 +435,49 @@ div.tocify {
 <p>The pathogen data can be imported using the <code>read_pepent()</code> function. A compressed folder that includes the data can be downloaded from <a href="https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=025cb4dadb57413980dbd7e760b94da8">here</a>. After the data are downloaded and extracted, the Excel file with the raw data is named “QryEnteros 2010 - 2019.xlsx”, or something similar depending on when the data were downloaded. The location of this file on your computer is passed to the import function. Below, a local file renamed as “enterodata.xlsx” that contains the pathogen data is imported.</p>
 <pre class="r"><code>entdat &lt;- read_pepent(&#39;data/enterodata.xlsx&#39;)
 head(entdat)</code></pre>
-<pre><code>## [90m# A tibble: 6 x 5[39m
+<pre><code>## # A tibble: 6 x 5
 ##   Name                  FieldNum Date                value status
-##   [3m[90m&lt;chr&gt;[39m[23m                 [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dttm&gt;[39m[23m              [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m 
-## [90m1[39m Alberts Landing Beach EH7      2010-06-29 [90m09:47:00[39m     4 [90m&quot;[39m&lt;[90m&quot;[39m   
-## [90m2[39m Alberts Landing Beach EH7      2010-07-27 [90m09:49:00[39m     4 [90m&quot;[39m&lt;[90m&quot;[39m   
-## [90m3[39m Alberts Landing Beach EH7      2010-08-13 [90m09:18:00[39m    28 [90m&quot;[39m[90m&quot;[39m    
-## [90m4[39m Alberts Landing Beach EH7      2011-06-22 [90m10:21:00[39m     4 [90m&quot;[39m&lt;[90m&quot;[39m   
-## [90m5[39m Alberts Landing Beach EH7      2011-07-20 [90m10:57:00[39m     4 [90m&quot;[39m&lt;[90m&quot;[39m   
-## [90m6[39m Alberts Landing Beach EH7      2011-08-17 [90m11:14:00[39m     4 [90m&quot;[39m&lt;[90m&quot;[39m</code></pre>
+##   &lt;chr&gt;                 &lt;chr&gt;    &lt;dttm&gt;              &lt;dbl&gt; &lt;chr&gt; 
+## 1 Alberts Landing Beach EH7      2010-06-29 09:47:00     4 &quot;&lt;&quot;   
+## 2 Alberts Landing Beach EH7      2010-07-27 09:49:00     4 &quot;&lt;&quot;   
+## 3 Alberts Landing Beach EH7      2010-08-13 09:18:00    28 &quot;&quot;    
+## 4 Alberts Landing Beach EH7      2011-06-22 10:21:00     4 &quot;&lt;&quot;   
+## 5 Alberts Landing Beach EH7      2011-07-20 10:57:00     4 &quot;&lt;&quot;   
+## 6 Alberts Landing Beach EH7      2011-08-17 11:14:00     4 &quot;&lt;&quot;</code></pre>
 <p>The raw data includes concentrations of <em>Enterococcus</em> bacteria as cfu/100 mL for swimming beaches in Suffolk County. The imported data returned by <code>read_pepent()</code> has a similar format as the raw data with slight modifications for readability in R. The fields include beach name (<code>Name</code>), field number (<code>FieldNum</code>), collection date and time (<code>Date</code> as Eastern Standard Time), bacteria concentration (<code>value</code>), and <code>status</code> showing if the observation was above or below detection (indicated as <code>&gt;</code> or <code>&lt;</code>).</p>
 <p>The function <code>anlz_entpep()</code> summarizes the imported data at each beach to quantify instances when bacterial concentrations were at risk of impacting human health. For Suffolk County, all bathing beaches are ranked by relative risk of exposure to harmful bacteria. Factors considered in the ranking include pollution threats (outfalls, discharges, runoff, marinas, etc.), beach location, historical monitoring data, and beach use. Most beaches in the Peconic Estuary are Tier 2, with at least 1-2 samples for bacterial concentrations collected weekly. For the peptools package, the <em>Enterococcus</em> data were used to count the number of instances at each beach when concentrations were above 104 cfu/ml. Although this does not mean a beach was closed, relative exceedances provide a coarse measure of potential risk of exposure to harmful pathogens.</p>
 <p>The <code>anlz_entpep()</code> function estimates this exposure risk by counting the number of instances in a year when concentrations at a beach exceeded the threshold for each 24 hour period in the dataset. The results show <code>samples</code> for number of days sampled each year, number of <code>exceedances</code> for the samples, and <code>perexceedances</code> as the proportion of samples with exceedances. Only the 28 relevant beaches for the Peconic Estuary are returned.</p>
 <pre class="r"><code>anlz_entpep(entdat)</code></pre>
-<pre><code>## [90m# A tibble: 308 x 5[39m
+<pre><code>## # A tibble: 308 x 5
 ##    Name                     yr samples exceedances proexceedances
-##  [90m*[39m [3m[90m&lt;chr&gt;[39m[23m                 [3m[90m&lt;dbl&gt;[39m[23m   [3m[90m&lt;int&gt;[39m[23m       [3m[90m&lt;int&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m Alberts Landing Beach  [4m2[24m010       3           0          0    
-## [90m 2[39m Alberts Landing Beach  [4m2[24m011       3           0          0    
-## [90m 3[39m Alberts Landing Beach  [4m2[24m012       4           0          0    
-## [90m 4[39m Alberts Landing Beach  [4m2[24m013       3           0          0    
-## [90m 5[39m Alberts Landing Beach  [4m2[24m014       4           0          0    
-## [90m 6[39m Alberts Landing Beach  [4m2[24m015       3           0          0    
-## [90m 7[39m Alberts Landing Beach  [4m2[24m016       5           0          0    
-## [90m 8[39m Alberts Landing Beach  [4m2[24m017       3           0          0    
-## [90m 9[39m Alberts Landing Beach  [4m2[24m018       6           1          0.167
-## [90m10[39m Alberts Landing Beach  [4m2[24m019       3           0          0    
-## [90m# … with 298 more rows[39m</code></pre>
+##  * &lt;chr&gt;                 &lt;dbl&gt;   &lt;int&gt;       &lt;int&gt;          &lt;dbl&gt;
+##  1 Alberts Landing Beach  2010       3           0          0    
+##  2 Alberts Landing Beach  2011       3           0          0    
+##  3 Alberts Landing Beach  2012       4           0          0    
+##  4 Alberts Landing Beach  2013       3           0          0    
+##  5 Alberts Landing Beach  2014       4           0          0    
+##  6 Alberts Landing Beach  2015       3           0          0    
+##  7 Alberts Landing Beach  2016       5           0          0    
+##  8 Alberts Landing Beach  2017       3           0          0    
+##  9 Alberts Landing Beach  2018       6           1          0.167
+## 10 Alberts Landing Beach  2019       3           0          0    
+## # ... with 298 more rows</code></pre>
 <p>The <code>anlz_entpep()</code> function includes an optional arguments for the threshold (<code>thr</code>). The default values are 104 cfu/100 mL, which can easily be changed. Here we use a threshold of 50 cfu/100 mL.</p>
 <pre class="r"><code>anlz_entpep(entdat, thr = 50)</code></pre>
-<pre><code>## [90m# A tibble: 308 x 5[39m
+<pre><code>## # A tibble: 308 x 5
 ##    Name                     yr samples exceedances proexceedances
-##  [90m*[39m [3m[90m&lt;chr&gt;[39m[23m                 [3m[90m&lt;dbl&gt;[39m[23m   [3m[90m&lt;int&gt;[39m[23m       [3m[90m&lt;int&gt;[39m[23m          [3m[90m&lt;dbl&gt;[39m[23m
-## [90m 1[39m Alberts Landing Beach  [4m2[24m010       3           0          0    
-## [90m 2[39m Alberts Landing Beach  [4m2[24m011       3           0          0    
-## [90m 3[39m Alberts Landing Beach  [4m2[24m012       4           0          0    
-## [90m 4[39m Alberts Landing Beach  [4m2[24m013       3           0          0    
-## [90m 5[39m Alberts Landing Beach  [4m2[24m014       4           0          0    
-## [90m 6[39m Alberts Landing Beach  [4m2[24m015       3           0          0    
-## [90m 7[39m Alberts Landing Beach  [4m2[24m016       5           0          0    
-## [90m 8[39m Alberts Landing Beach  [4m2[24m017       3           0          0    
-## [90m 9[39m Alberts Landing Beach  [4m2[24m018       6           1          0.167
-## [90m10[39m Alberts Landing Beach  [4m2[24m019       3           0          0    
-## [90m# … with 298 more rows[39m</code></pre>
+##  * &lt;chr&gt;                 &lt;dbl&gt;   &lt;int&gt;       &lt;int&gt;          &lt;dbl&gt;
+##  1 Alberts Landing Beach  2010       3           0          0    
+##  2 Alberts Landing Beach  2011       3           0          0    
+##  3 Alberts Landing Beach  2012       4           0          0    
+##  4 Alberts Landing Beach  2013       3           0          0    
+##  5 Alberts Landing Beach  2014       4           0          0    
+##  6 Alberts Landing Beach  2015       3           0          0    
+##  7 Alberts Landing Beach  2016       5           0          0    
+##  8 Alberts Landing Beach  2017       3           0          0    
+##  9 Alberts Landing Beach  2018       6           1          0.167
+## 10 Alberts Landing Beach  2019       3           0          0    
+## # ... with 298 more rows</code></pre>
 </div>
 <div id="plotting-results" class="section level2">
 <h2>Plotting results</h2>

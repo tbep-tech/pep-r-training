@@ -442,7 +442,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/" target="_blank">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html" target="_blank">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-16, there are 17091 supplemental packages for R on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-16, there are 17073 supplemental packages for R on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -487,7 +487,7 @@ div.tocify {
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>R is built around functions. These are commands that do specific things based on what you provide. The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many functions (3588, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many functions (3621, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -496,32 +496,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  9.219884 11.332475 10.028810 12.587678 13.027298  9.639749  8.966097
-##   [8] 10.972144 13.145006 13.079923 10.523107  9.534497  7.957431 11.078810
-##  [15] 10.830067  6.934739  9.940298  9.475978 12.163849 11.598509 10.803026
-##  [22] 11.644111  9.026026  8.830559  9.111347 11.486862  7.245954  9.256779
-##  [29]  8.603656  9.405468 10.808179 13.005612 12.183678  9.604416  9.918117
-##  [36]  9.698240  8.796576 13.661795 10.500065 10.662756  9.509160  7.397759
-##  [43]  8.646823 11.647917 11.991859  9.769478  6.793572 11.279587  8.365177
-##  [50]  8.044390  5.607758  8.865671 12.587297  9.970504 10.913655  9.717586
-##  [57] 10.457791 11.485054  9.175903  8.943546  8.489227 14.280784 11.743389
-##  [64]  7.954688 10.900866  9.480250  6.777465 11.173100  6.995616  9.481639
-##  [71]  9.938607 10.233111  7.558333 10.822249  7.865297 11.330152  7.990000
-##  [78]  7.790925  8.663124  6.075139 10.708883  9.649718  8.504318 13.927490
-##  [85] 11.673076 11.303659  7.767779  4.937088  7.644528 11.254998  9.774859
-##  [92]  9.475547 13.598848  8.862349 11.880292  9.873961 10.870369 10.662728
-##  [99] 13.209574  8.215269</code></pre>
+<pre><code>##   [1] 12.121201 12.657946 12.328241  8.490633  8.612954 10.119145 12.411865
+##   [8] 12.728322 10.061706  9.239350 11.464164 12.367079  8.057814  9.356684
+##  [15] 12.517037 11.837241  7.474520  8.322977  9.175312 10.108481 12.661198
+##  [22]  8.388969 11.274422 11.102437  7.912130  9.679937  8.802915 11.056321
+##  [29] 12.183760 10.166416  9.613745 10.297465 12.811041 15.409179 10.197664
+##  [36]  9.753791  4.901342 11.744501 12.036965  9.640937  9.191328  8.253391
+##  [43]  8.671177  9.626147  9.314236  6.379607  9.046340 10.256799  9.075328
+##  [50] 10.024204 15.100105  5.036351  8.442857 12.141624 10.209137  7.264797
+##  [57] 12.524663 11.680773 11.488935 14.488038 11.860586  8.172216  8.893508
+##  [64]  7.861643 18.213883 13.034485 10.590198 10.534924  8.450475 12.553277
+##  [71]  9.437713 11.007132  9.686218  5.505592 10.976968 10.604585  8.037882
+##  [78]  8.439578  8.458411  9.587077 11.320399 10.801372  8.998790  9.887574
+##  [85] 12.956638 11.024843  9.249675 12.426350  9.555867 10.389082 11.478223
+##  [92]  9.626027 13.418231  5.515081  9.296283  6.373122 12.619424 10.457044
+##  [99] 12.138270  6.798975</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.1378668</code></pre>
+<pre><code>## [1] -0.08746918</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -1.727494</code></pre>
+<pre><code>## [1] -1.292</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 4.592427</code></pre>
+<pre><code>## [1] 18.5373</code></pre>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
 <p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
@@ -533,7 +533,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-16, there are 17091 packages on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-16, there are 17073 packages on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -712,37 +712,37 @@ names(rawdat)</code></pre>
 ## [5] &quot;Time&quot;           &quot;Waterbody_Area&quot; &quot;Result&quot;</code></pre>
 <pre class="r"><code># see the first six rows
 head(rawdat)</code></pre>
-<pre><code>## [90m# A tibble: 6 x 41[39m
+<pre><code>## # A tibble: 6 x 41
 ##   Date                Time                BayStation Diurnal Location Replicate
-##   [3m[90m&lt;dttm&gt;[39m[23m              [3m[90m&lt;dttm&gt;[39m[23m                   [3m[90m&lt;dbl&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m   [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;chr&gt;[39m[23m    
-## [90m1[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m07:00:00[39m      [4m6[24m[4m0[24m100 A       [31mNA[39m       [31mNA[39m       
-## [90m2[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m13:20:00[39m      [4m6[24m[4m0[24m100 P       [31mNA[39m       [31mNA[39m       
-## [90m3[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m06:10:00[39m      [4m6[24m[4m0[24m110 A       [31mNA[39m       [31mNA[39m       
-## [90m4[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m06:25:00[39m      [4m6[24m[4m0[24m110 A       [31mNA[39m       R        
-## [90m5[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m13:00:00[39m      [4m6[24m[4m0[24m110 P       [31mNA[39m       [31mNA[39m       
-## [90m6[39m 1976-07-20 [90m00:00:00[39m 1899-12-31 [90m13:10:00[39m      [4m6[24m[4m0[24m110 P       [31mNA[39m       R        
-## [90m# … with 35 more variables: Depth [3m[90m&lt;dbl&gt;[90m[23m, Secchi [3m[90m&lt;dbl&gt;[90m[23m, Temp [3m[90m&lt;dbl&gt;[90m[23m, D.O. [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   Sal [3m[90m&lt;dbl&gt;[90m[23m, Cond [3m[90m&lt;lgl&gt;[90m[23m, pH [3m[90m&lt;lgl&gt;[90m[23m, `T Coliform` [3m[90m&lt;chr&gt;[90m[23m, `F Coliform` [3m[90m&lt;chr&gt;[90m[23m,[39m
-## [90m#   NH3 [3m[90m&lt;chr&gt;[90m[23m, NO2 [3m[90m&lt;chr&gt;[90m[23m, NO3 [3m[90m&lt;chr&gt;[90m[23m, Nox [3m[90m&lt;lgl&gt;[90m[23m, Urea [3m[90m&lt;lgl&gt;[90m[23m, TKN [3m[90m&lt;chr&gt;[90m[23m,[39m
-## [90m#   DKN [3m[90m&lt;chr&gt;[90m[23m, TN [3m[90m&lt;lgl&gt;[90m[23m, DN [3m[90m&lt;lgl&gt;[90m[23m, `Total Phosphate` [3m[90m&lt;dbl&gt;[90m[23m, `Dissolved[39m
-## [90m#   Phosphate` [3m[90m&lt;dbl&gt;[90m[23m, TP [3m[90m&lt;lgl&gt;[90m[23m, DP [3m[90m&lt;lgl&gt;[90m[23m, `o-PO4` [3m[90m&lt;dbl&gt;[90m[23m, TOC [3m[90m&lt;lgl&gt;[90m[23m, DOC [3m[90m&lt;lgl&gt;[90m[23m,[39m
-## [90m#   Silicates [3m[90m&lt;lgl&gt;[90m[23m, Chloride [3m[90m&lt;lgl&gt;[90m[23m, Sulfate [3m[90m&lt;lgl&gt;[90m[23m, TSS [3m[90m&lt;lgl&gt;[90m[23m, `Chlorophyll A -[39m
-## [90m#   Total` [3m[90m&lt;dbl&gt;[90m[23m, `Chlorophyll A - Fractionated` [3m[90m&lt;lgl&gt;[90m[23m, Aureo [3m[90m&lt;dbl&gt;[90m[23m,[39m
-## [90m#   Tide [3m[90m&lt;lgl&gt;[90m[23m, Weather [3m[90m&lt;lgl&gt;[90m[23m, `Water Color` [3m[90m&lt;lgl&gt;[90m[23m[39m</code></pre>
+##   &lt;dttm&gt;              &lt;dttm&gt;                   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    
+## 1 1976-07-20 00:00:00 1899-12-31 07:00:00      60100 A       &lt;NA&gt;     &lt;NA&gt;     
+## 2 1976-07-20 00:00:00 1899-12-31 13:20:00      60100 P       &lt;NA&gt;     &lt;NA&gt;     
+## 3 1976-07-20 00:00:00 1899-12-31 06:10:00      60110 A       &lt;NA&gt;     &lt;NA&gt;     
+## 4 1976-07-20 00:00:00 1899-12-31 06:25:00      60110 A       &lt;NA&gt;     R        
+## 5 1976-07-20 00:00:00 1899-12-31 13:00:00      60110 P       &lt;NA&gt;     &lt;NA&gt;     
+## 6 1976-07-20 00:00:00 1899-12-31 13:10:00      60110 P       &lt;NA&gt;     R        
+## # ... with 35 more variables: Depth &lt;dbl&gt;, Secchi &lt;dbl&gt;, Temp &lt;dbl&gt;,
+## #   D.O. &lt;dbl&gt;, Sal &lt;dbl&gt;, Cond &lt;lgl&gt;, pH &lt;lgl&gt;, `T Coliform` &lt;chr&gt;, `F
+## #   Coliform` &lt;chr&gt;, NH3 &lt;chr&gt;, NO2 &lt;chr&gt;, NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;,
+## #   TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, `Total Phosphate` &lt;dbl&gt;,
+## #   `Dissolved Phosphate` &lt;dbl&gt;, TP &lt;lgl&gt;, DP &lt;lgl&gt;, `o-PO4` &lt;dbl&gt;, TOC &lt;lgl&gt;,
+## #   DOC &lt;lgl&gt;, Silicates &lt;lgl&gt;, Chloride &lt;lgl&gt;, Sulfate &lt;lgl&gt;, TSS &lt;lgl&gt;,
+## #   `Chlorophyll A - Total` &lt;dbl&gt;, `Chlorophyll A - Fractionated` &lt;lgl&gt;,
+## #   Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, `Water Color` &lt;lgl&gt;</code></pre>
 <pre class="r"><code>head(enterodat)</code></pre>
-<pre><code>## [90m# A tibble: 6 x 7[39m
+<pre><code>## # A tibble: 6 x 7
 ##   Beach_EPA_ID Name  FieldNum ColDate             Time               
-##   [3m[90m&lt;lgl&gt;[39m[23m        [3m[90m&lt;chr&gt;[39m[23m [3m[90m&lt;chr&gt;[39m[23m    [3m[90m&lt;dttm&gt;[39m[23m              [3m[90m&lt;dttm&gt;[39m[23m             
-## [90m1[39m [31mNA[39m           Bayp… I10      2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m2[39m [31mNA[39m           Sayv… I11      2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m3[39m [31mNA[39m           Bayb… I27      2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m4[39m [31mNA[39m           East… I4       2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m5[39m [31mNA[39m           Isli… I3       2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m6[39m [31mNA[39m           Benj… I2       2020-05-18 [90m00:00:00[39m 1899-12-31 [90m12:00:00[39m
-## [90m# … with 2 more variables: Waterbody_Area [3m[90m&lt;lgl&gt;[90m[23m, Result [3m[90m&lt;chr&gt;[90m[23m[39m</code></pre>
+##   &lt;lgl&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;             
+## 1 NA           Bayp~ I10      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 2 NA           Sayv~ I11      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 3 NA           Bayb~ I27      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 4 NA           East~ I4       2020-05-18 00:00:00 1899-12-31 12:00:00
+## 5 NA           Isli~ I3       2020-05-18 00:00:00 1899-12-31 12:00:00
+## 6 NA           Benj~ I2       2020-05-18 00:00:00 1899-12-31 12:00:00
+## # ... with 2 more variables: Waterbody_Area &lt;lgl&gt;, Result &lt;chr&gt;</code></pre>
 <pre class="r"><code># get the overall structure
 str(rawdat)</code></pre>
-<pre><code>## tibble [33,978 × 41] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble [33,978 x 41] (S3: tbl_df/tbl/data.frame)
 ##  $ Date                        : POSIXct[1:33978], format: &quot;1976-07-20&quot; &quot;1976-07-20&quot; ...
 ##  $ Time                        : POSIXct[1:33978], format: &quot;1899-12-31 07:00:00&quot; &quot;1899-12-31 13:20:00&quot; ...
 ##  $ BayStation                  : num [1:33978] 60100 60100 60110 60110 60110 ...
@@ -785,7 +785,7 @@ str(rawdat)</code></pre>
 ##  $ Weather                     : logi [1:33978] NA NA NA NA NA NA ...
 ##  $ Water Color                 : logi [1:33978] NA NA NA NA NA NA ...</code></pre>
 <pre class="r"><code>str(enterodat)</code></pre>
-<pre><code>## tibble [36,231 × 7] (S3: tbl_df/tbl/data.frame)
+<pre><code>## tibble [36,231 x 7] (S3: tbl_df/tbl/data.frame)
 ##  $ Beach_EPA_ID  : logi [1:36231] NA NA NA NA NA NA ...
 ##  $ Name          : chr [1:36231] &quot;Bayport Beach&quot; &quot;Sayville Marina Park Beach&quot; &quot;Bayberry Beach &amp; Tennis Club Beach&quot; &quot;East Islip Beach&quot; ...
 ##  $ FieldNum      : chr [1:36231] &quot;I10&quot; &quot;I11&quot; &quot;I27&quot; &quot;I4&quot; ...
