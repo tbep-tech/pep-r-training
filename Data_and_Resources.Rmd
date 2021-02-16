@@ -20,12 +20,16 @@ This is a list of the data sources used in this workshop. For live-coding, pleas
     - Enterococcus data: [enterodata.xlsx](data/enterodata.xlsx)
  
  - All R scripts used in the lessons as a [zipped folder](scripts.zip).  Inside you'll find these files: 
-    - [R_Basics.R](rbasics.R)
+    - [rbasics.R](rbasics.R)
     - [wq.R](wq.R)
     - [pathogens.R](pathogens.R)
     - [do.R](do.R)
 
 ### Resources
+
+#### *Saving figures from peptools*
+
+* Checkout this [link](https://tbep-tech.github.io/peptools/articles/figures.html) for instructions on saving graphics from the peptools package. 
 
 #### *R Lessons & Tutorials*
 

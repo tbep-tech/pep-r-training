@@ -28,7 +28,7 @@ Get the lesson data: [download zip](data/data.zip)
 
 ## Goals and motivation
 
-This module will provide you with background into the structure of the peptools R package and how to use functions in this package read, anaalyze, and plot water quality data indicators for the Peconic Estuary Program. You should be able to answer these questions at the end of this session:
+This module will provide you with background into the structure of the peptools R package and how to use functions in this package to read, analyze, and plot water quality indicators for the Peconic Estuary Program. You should be able to answer these questions at the end of this session:
 
 * What is the peptools package and how are the functions setup?
 * How can I use the peptools package to import water quality data? 
@@ -37,7 +37,7 @@ This module will provide you with background into the structure of the peptools 
 
 ## peptools overview
 
-The peptools package was developed as a set of functions to read, analyze, and plot water quality data relevant for the PEP.  the package source code lives on [GitHub](https://github.com/tbep-tech/peptools) and a [website](https://tbep-tech.github.io/peptools/) that includes function references and full documentation is also provided. The following shows all functions provided in peptools, organized by prefix. 
+The peptools package was developed as a set of functions to read, analyze, and plot water quality data relevant for the PEP.  the package source code lives on [GitHub](https://github.com/tbep-tech/peptools).  A [website](https://tbep-tech.github.io/peptools/) that includes function references and full documentation is also provided. The following shows all functions provided in peptools, organized by prefix. 
 
 #### Read
 
@@ -99,7 +99,7 @@ The `pepseg` data object also included with the package shows the polygons for t
 mapview(pepseg)
 ```
 
-The water quality data can be imported using the `read_pepwq()` function.  A compressed folder that includes the data can be downloaded from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=8107f192ffac406380b6d61d3d3dbf7d).  After the data are downloaded and extracted, the Excel file with the raw data is named "Peconics SCDHS WQ data - up to 2019 so far.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "currentdata.xlsx" that contains the water quality data is imported. 
+The water quality data can be imported using the `read_pepwq()` function.  The data are included in this lesson and it was obtained as a raw data file from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=8107f192ffac406380b6d61d3d3dbf7d).  To originla data faile is named "Peconics SCDHS WQ data - up to 2019 so far.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "currentdata.xlsx" that contains the water quality data is imported. 
 
 ```{r}
 rawdat <- read_pepwq('data/currentdata.xlsx')
@@ -108,7 +108,7 @@ head(rawdat)
 
 The raw data includes multiple fields, but only the chlorophyll and secchi data are retained for reporting.  The data are in long format with the `name` column showing which observation (chlorophyll or secchi) the row `value` shows and the `status` showing if the observation was above or below detection (indicated as `>` or `<`).  Each station is also grouped by major bay segment, defined as `r levels(rawdat$bay_segment)`. 
 
-The function `anlz_pepdat()` summarizes the station data by bay segment.  The function returns annual means for chlorophyll and secchi depth and monthly means by year for chlorophyll and secchi depth. These summaries are then used to determine if bay segment targets for water quality are met using the anlz_attain() and `anlz_attainpep()` function.
+The function `anlz_pepdat()` summarizes the station data by bay segment.  The function returns annual means for chlorophyll and secchi depth and monthly means by year for chlorophyll and secchi depth. These summaries are then used to determine if bay segment targets for water quality are met using the `anlz_attain()` and `anlz_attainpep()` function.
 
 Below shows how to use `anlz_pepdat()` to summarize the data by bay segment to estimate annual and monthly means for chlorophyll and secchi depth. The output is a two-element list for the annual (ann) and monthly (mos) means by segment.
 
@@ -117,7 +117,7 @@ medpep <- anlz_medpep(rawdat)
 medpep
 ```
 
-This output can then be further analyzed with `anlz_attainpep()` to determine if the bay segment outcomes are met in each year. The results are used by the plotting functions described below. In short, the `chl_sd` column indicates the categorical outcome for chlorophyll and light attenuation for each segment. The outcomes are integer values from zero to three. The relative exceedances of water quality thresholds for each segment, both in duration and magnitude, are indicated by higher integer values.
+This output can then be further analyzed with `anlz_attainpep()` to determine if the bay segment outcomes are met in each year. The results are used by the plotting functions described below. In short, the `chl_sd` column indicates the categorical outcome for chlorophyll and light attenuation for each segment. The outcomes are integer values from zero to three. The relative exceedances of water quality thresholds for each segment, both in duration and magnitude, are indicated by higher integer values.  This is explained in detail in the next section.
 
 ```{r}
 anlz_attainpep(medpep)
