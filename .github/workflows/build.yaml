@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '4.0.3'}
+          - {os: windows-latest, r: '4.0.2'}
           
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -36,7 +36,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install R package dependencies
         run: |
-          install.packages(c("rmarkdown", "tidyverse", "remotes"))
+          install.packages(c("rmarkdown", "tidyverse", "remotes", "broom"))
           remotes::install_github("tbep-tech/peptools")
           remotes::install_version("mapview", version = "2.7.8")
         shell: Rscript {0}
