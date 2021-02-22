@@ -19,6 +19,15 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -38,11 +47,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -55,32 +59,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -91,10 +69,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -111,40 +85,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 52px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h2 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h3 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h4 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h5 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
-.section h6 {
-  padding-top: 57px;
-  margin-top: -57px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -172,7 +119,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -184,7 +131,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -195,10 +142,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -210,7 +170,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -336,13 +295,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
+<div class="row">
+<div class="col-sm-12 col-md-4 col-lg-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="toc-content col-sm-12 col-md-8 col-lg-9">
 
 
 
@@ -394,7 +353,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -442,7 +401,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/" target="_blank">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html" target="_blank">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-16, there are 17074 supplemental packages for R on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-22, there are 17142 supplemental packages for R on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -496,32 +455,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  8.399529 10.441530  8.889384 11.346364  5.098328 11.263930 12.720076
-##   [8]  8.779324 10.235998  9.142335 14.669416  9.689262 10.154406  8.150932
-##  [15]  7.981049 12.327930  7.968960 10.987727 13.112991 10.950497  7.442263
-##  [22] 10.439837 11.081186  8.097076  9.379932 10.772281  9.172540 11.714837
-##  [29] 11.211525 10.266294  9.625727  8.672840  8.577986  7.152555 12.260397
-##  [36] 10.566306  9.384381 12.009893  4.935044 15.912869  6.013915 12.245985
-##  [43]  7.707825 11.785991  8.722758  9.514224  9.811036 10.541728  5.410867
-##  [50]  7.959146 10.842001 11.093240 11.320512 12.029066 10.734114 10.370992
-##  [57]  9.768321 11.513120  7.233781  9.582208  8.464998  9.501975  9.273830
-##  [64] 12.818072  9.065174 11.538213 13.486838 10.487574 11.525270 10.942322
-##  [71] 10.780196 11.544229  7.450008  7.055841 10.801502 10.263843  7.795739
-##  [78]  8.957728  9.132643 10.653407 11.962656 11.799833 11.385243 13.240950
-##  [85] 11.063039 11.262575 11.775373 10.456010 10.373625 13.577027 12.230744
-##  [92] 10.958879  9.189648  9.319945 11.292576 10.348075  5.343281  9.090129
-##  [99] 10.952977  9.620508</code></pre>
+<pre><code>##   [1]  9.688949  9.741283  7.538279  6.639622  9.754642  9.934239 11.673775
+##   [8] 11.632053 11.167588  8.783660 13.562681 12.167843 11.563390  8.585859
+##  [15]  9.333317  6.507571 11.665523 11.987497  8.455209  9.655019  9.929730
+##  [22]  8.066059  9.887049 10.391579 12.499410  9.716477  7.954198 11.313521
+##  [29]  9.123760 12.267776  7.118800  9.096876  9.481317  8.217120  7.406331
+##  [36] 11.875188 11.564663  3.801929  7.961180 10.032531  7.175772  9.615831
+##  [43]  8.330944 10.485130 10.277650 12.046284  8.470119 10.260272 11.540018
+##  [50] 12.449939 11.539395 10.954407  9.041123 10.083273 11.699488 12.791123
+##  [57]  7.218348  9.020485  8.663524  8.403400 11.953876 10.907656  8.604645
+##  [64] 11.022282  8.287442  8.811231  7.685780 10.220521  5.841507  6.783872
+##  [71]  7.197343  9.525784  9.623352  9.348741 11.257439  8.921761  9.600335
+##  [78] 11.591006 11.640376  9.484562  8.847087  8.557383 10.520587 12.435331
+##  [85] 10.951971  7.871965 10.170236  8.437954  8.652504 13.872202 10.944722
+##  [92]  8.305254 10.066436 11.547433  9.970797 10.405199 12.757363  8.477313
+##  [99] 12.829252 11.190183</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] -0.0222071</code></pre>
+<pre><code>## [1] -0.1475</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] 20.77653</code></pre>
+<pre><code>## [1] 7.776987</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] -1.643513</code></pre>
+<pre><code>## [1] -6.799723</code></pre>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
 <p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
@@ -533,7 +492,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-16, there are 17074 packages on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-22, there are 17142 packages on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -724,23 +683,23 @@ head(rawdat)</code></pre>
 ## 5 1976-07-20 00:00:00 1899-12-31 13:00:00      60110 P       &lt;NA&gt;     &lt;NA&gt;     
 ## 6 1976-07-20 00:00:00 1899-12-31 13:10:00      60110 P       &lt;NA&gt;     R        
 ## # ... with 35 more variables: Depth &lt;dbl&gt;, Secchi &lt;dbl&gt;, Temp &lt;dbl&gt;,
-## #   D.O. &lt;dbl&gt;, Sal &lt;dbl&gt;, Cond &lt;lgl&gt;, pH &lt;lgl&gt;, `T Coliform` &lt;chr&gt;, `F
-## #   Coliform` &lt;chr&gt;, NH3 &lt;chr&gt;, NO2 &lt;chr&gt;, NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;,
-## #   TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, `Total Phosphate` &lt;dbl&gt;,
-## #   `Dissolved Phosphate` &lt;dbl&gt;, TP &lt;lgl&gt;, DP &lt;lgl&gt;, `o-PO4` &lt;dbl&gt;, TOC &lt;lgl&gt;,
+## #   D.O. &lt;dbl&gt;, Sal &lt;dbl&gt;, Cond &lt;lgl&gt;, pH &lt;lgl&gt;, T Coliform &lt;chr&gt;,
+## #   F Coliform &lt;chr&gt;, NH3 &lt;chr&gt;, NO2 &lt;chr&gt;, NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;,
+## #   TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, Total Phosphate &lt;dbl&gt;,
+## #   Dissolved Phosphate &lt;dbl&gt;, TP &lt;lgl&gt;, DP &lt;lgl&gt;, o-PO4 &lt;dbl&gt;, TOC &lt;lgl&gt;,
 ## #   DOC &lt;lgl&gt;, Silicates &lt;lgl&gt;, Chloride &lt;lgl&gt;, Sulfate &lt;lgl&gt;, TSS &lt;lgl&gt;,
-## #   `Chlorophyll A - Total` &lt;dbl&gt;, `Chlorophyll A - Fractionated` &lt;lgl&gt;,
-## #   Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, `Water Color` &lt;lgl&gt;</code></pre>
+## #   Chlorophyll A - Total &lt;dbl&gt;, Chlorophyll A - Fractionated &lt;lgl&gt;,
+## #   Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, Water Color &lt;lgl&gt;</code></pre>
 <pre class="r"><code>head(enterodat)</code></pre>
 <pre><code>## # A tibble: 6 x 7
-##   Beach_EPA_ID Name  FieldNum ColDate             Time               
-##   &lt;lgl&gt;        &lt;chr&gt; &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;             
-## 1 NA           Bayp~ I10      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 2 NA           Sayv~ I11      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 3 NA           Bayb~ I27      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 4 NA           East~ I4       2020-05-18 00:00:00 1899-12-31 12:00:00
-## 5 NA           Isli~ I3       2020-05-18 00:00:00 1899-12-31 12:00:00
-## 6 NA           Benj~ I2       2020-05-18 00:00:00 1899-12-31 12:00:00
+##   Beach_EPA_ID Name             FieldNum ColDate             Time               
+##   &lt;lgl&gt;        &lt;chr&gt;            &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;             
+## 1 NA           Bayport Beach    I10      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 2 NA           Sayville Marina~ I11      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 3 NA           Bayberry Beach ~ I27      2020-05-18 00:00:00 1899-12-31 12:00:00
+## 4 NA           East Islip Beach I4       2020-05-18 00:00:00 1899-12-31 12:00:00
+## 5 NA           Islip Beach      I3       2020-05-18 00:00:00 1899-12-31 12:00:00
+## 6 NA           Benjamin Beach   I2       2020-05-18 00:00:00 1899-12-31 12:00:00
 ## # ... with 2 more variables: Waterbody_Area &lt;lgl&gt;, Result &lt;chr&gt;</code></pre>
 <pre class="r"><code># get the overall structure
 str(rawdat)</code></pre>
@@ -830,7 +789,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
