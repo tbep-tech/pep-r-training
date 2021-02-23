@@ -39,7 +39,7 @@ Information from this monitoring program can be summarized in graphical form, to
 
 ## Data import and processing
 
-The pathogen data can be imported using the `read_pepent()` function. A compressed folder that includes the data can be downloaded from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=025cb4dadb57413980dbd7e760b94da8).  After the data are downloaded and extracted, the Excel file with the raw data is named "QryEnteros 2010 - 2019.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "enterodata.xlsx" that contains the pathogen data is imported. 
+The pathogen data can be imported using the `read_pepent()` function. A compressed folder that includes the data can be downloaded from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=025cb4dadb57413980dbd7e760b94da8).  After the data are downloaded and extracted, the Excel file with the raw data is named "QryEnteros 2010 - 2019.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file on your computer renamed as "enterodata.xlsx" that contains the pathogen data is imported. 
 
 ```{r}
 entdat <- read_pepent('data/enterodata.xlsx')
@@ -48,9 +48,9 @@ head(entdat)
 
 The raw data includes concentrations of *Enterococcus* bacteria as cfu/100 mL for swimming beaches in Suffolk County.  The imported data returned by `read_pepent()` has a similar format as the raw data with slight modifications for readability in R.  The fields include beach name (`Name`), field number (`FieldNum`), collection date and time (`Date` as Eastern Standard Time), bacteria concentration (`value`), and `status` showing if the observation was above or below detection (indicated as `>` or `<`).  
 
-The function `anlz_entpep()` summarizes the imported data at each beach to quantify instances when bacterial concentrations were at risk of impacting human health. For Suffolk County, all bathing beaches are ranked by relative risk of exposure to harmful bacteria. Factors considered in the ranking include pollution threats (outfalls, discharges, runoff, marinas, etc.), beach location, historical monitoring data, and beach use.  Most beaches in the Peconic Estuary are Tier 2, with at least 1-2 samples for bacterial concentrations collected weekly. For the peptools package, the *Enterococcus* data were used to count the number of instances at each beach when concentrations were above 104 cfu/ml.  Although this does not mean a beach was closed, relative exceedances provide a coarse measure of potential risk of exposure to harmful pathogens. 
+The function `anlz_entpep()` summarizes the imported data at each beach to quantify instances when bacterial concentrations may be at risk of impacting human health. For Suffolk County, all bathing beaches are ranked by relative risk of exposure to harmful bacteria. Factors considered in the ranking include pollution threats (outfalls, discharges, runoff, marinas, etc.), beach location, historical monitoring data, and beach use.  Most beaches in the Peconic Estuary are Tier 2 or 3, with at most 1-2 samples for bacterial concentrations collected weekly. For the peptools package, the *Enterococcus* data were used to count the number of instances at each beach when concentrations were above 104 cfu/ml.  Although this does not mean a beach was closed, relative exceedances provide a coarse measure of potential risk of exposure to harmful pathogens. 
 
-The `anlz_entpep()` function estimates this exposure risk by counting the number of instances in a year when concentrations at a beach exceeded the threshold for each 24 hour period in the dataset.  The results show `samples` for number of days sampled each year, number of `exceedances` for the samples, and `perexceedances` as the proportion of samples with exceedances. Only the 28 relevant beaches for the Peconic Estuary are returned.
+The `anlz_entpep()` function estimates this exposure risk by counting the number of instances in a year when concentrations at a beach exceeded the threshold for each 24 hour period in the dataset.  The results show `samples` for number of days sampled each year, number of `exceedances` for the samples, and `proexceedances` as the proportion of samples with exceedances. Only the 28 relevant beaches for the Peconic Estuary are returned.
 
 ```{r}
 anlz_entpep(entdat)
@@ -64,7 +64,7 @@ anlz_entpep(entdat, thr = 50)
 
 ## Plotting results
 
-A summary graphic can be plotted using the `show_matrixpep()` function. This creates an annual reporting matrix for the relative risk of pathogen exposure at 28 selected beaches in the Peconic Estuary. Tracking the number of exceedances of bacterial concentrations provides a framework for identifying locations that may need management actions to remediate potential public health issues.  
+A summary graphic can be plotted using the `show_entmatrix()` function. This creates an annual reporting matrix for the relative risk of pathogen exposure at 28 selected beaches in the Peconic Estuary. Tracking the number of exceedances of bacterial concentrations provides a framework for identifying locations that may need management actions to remediate potential public health issues.  
 
 ```{r, fig.height = 7, fig.width = 7, fig.cap = 'Frequencies of exceedances of *Enterococcus* concentrations at Peconic Estuary bathing beaches for the years 2010 through 2020.  Values are proportion of samples exceeding.'}
 show_entmatrix(entdat)
@@ -82,13 +82,3 @@ The `anlz_entpep()` function is used internally in `show_entmatrix()`, such that
 show_entmatrix(entdat, thr = 35)
 ```
 
-The matrix is also a `ggplot` object and its layout can be changed using `ggplot` elements. Note the use of `txtsz = NULL` to remove the text labels. 
-
-```{r, fig.height = 4, fig.width = 8}
-library(tidyverse)
-
-show_entmatrix(entdat, txtsz = NULL) +
-  scale_x_discrete(expand = c(0,0), breaks = c(2000:2020)) + 
-  coord_flip() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 7))
-```
