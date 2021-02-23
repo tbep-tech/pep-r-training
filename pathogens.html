@@ -391,7 +391,7 @@ div.tocify {
 </div>
 <div id="data-import-and-processing" class="section level2">
 <h2>Data import and processing</h2>
-<p>The pathogen data can be imported using the <code>read_pepent()</code> function. A compressed folder that includes the data can be downloaded from <a href="https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=025cb4dadb57413980dbd7e760b94da8">here</a>. After the data are downloaded and extracted, the Excel file with the raw data is named “QryEnteros 2010 - 2019.xlsx”, or something similar depending on when the data were downloaded. The location of this file on your computer is passed to the import function. Below, a local file renamed as “enterodata.xlsx” that contains the pathogen data is imported.</p>
+<p>The pathogen data can be imported using the <code>read_pepent()</code> function. A compressed folder that includes the data can be downloaded from <a href="https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=025cb4dadb57413980dbd7e760b94da8">here</a>. After the data are downloaded and extracted, the Excel file with the raw data is named “QryEnteros 2010 - 2019.xlsx”, or something similar depending on when the data were downloaded. The location of this file on your computer is passed to the import function. Below, a local file on your computer renamed as “enterodata.xlsx” that contains the pathogen data is imported.</p>
 <pre class="r"><code>entdat &lt;- read_pepent(&#39;data/enterodata.xlsx&#39;)
 head(entdat)</code></pre>
 <pre><code>## # A tibble: 6 x 5
@@ -404,8 +404,8 @@ head(entdat)</code></pre>
 ## 5 Alberts Landing Beach EH7      2011-07-20 10:57:00     4 &quot;&lt;&quot;   
 ## 6 Alberts Landing Beach EH7      2011-08-17 11:14:00     4 &quot;&lt;&quot;</code></pre>
 <p>The raw data includes concentrations of <em>Enterococcus</em> bacteria as cfu/100 mL for swimming beaches in Suffolk County. The imported data returned by <code>read_pepent()</code> has a similar format as the raw data with slight modifications for readability in R. The fields include beach name (<code>Name</code>), field number (<code>FieldNum</code>), collection date and time (<code>Date</code> as Eastern Standard Time), bacteria concentration (<code>value</code>), and <code>status</code> showing if the observation was above or below detection (indicated as <code>&gt;</code> or <code>&lt;</code>).</p>
-<p>The function <code>anlz_entpep()</code> summarizes the imported data at each beach to quantify instances when bacterial concentrations were at risk of impacting human health. For Suffolk County, all bathing beaches are ranked by relative risk of exposure to harmful bacteria. Factors considered in the ranking include pollution threats (outfalls, discharges, runoff, marinas, etc.), beach location, historical monitoring data, and beach use. Most beaches in the Peconic Estuary are Tier 2, with at least 1-2 samples for bacterial concentrations collected weekly. For the peptools package, the <em>Enterococcus</em> data were used to count the number of instances at each beach when concentrations were above 104 cfu/ml. Although this does not mean a beach was closed, relative exceedances provide a coarse measure of potential risk of exposure to harmful pathogens.</p>
-<p>The <code>anlz_entpep()</code> function estimates this exposure risk by counting the number of instances in a year when concentrations at a beach exceeded the threshold for each 24 hour period in the dataset. The results show <code>samples</code> for number of days sampled each year, number of <code>exceedances</code> for the samples, and <code>perexceedances</code> as the proportion of samples with exceedances. Only the 28 relevant beaches for the Peconic Estuary are returned.</p>
+<p>The function <code>anlz_entpep()</code> summarizes the imported data at each beach to quantify instances when bacterial concentrations may be at risk of impacting human health. For Suffolk County, all bathing beaches are ranked by relative risk of exposure to harmful bacteria. Factors considered in the ranking include pollution threats (outfalls, discharges, runoff, marinas, etc.), beach location, historical monitoring data, and beach use. Most beaches in the Peconic Estuary are Tier 2 or 3, with at most 1-2 samples for bacterial concentrations collected weekly. For the peptools package, the <em>Enterococcus</em> data were used to count the number of instances at each beach when concentrations were above 104 cfu/ml. Although this does not mean a beach was closed, relative exceedances provide a coarse measure of potential risk of exposure to harmful pathogens.</p>
+<p>The <code>anlz_entpep()</code> function estimates this exposure risk by counting the number of instances in a year when concentrations at a beach exceeded the threshold for each 24 hour period in the dataset. The results show <code>samples</code> for number of days sampled each year, number of <code>exceedances</code> for the samples, and <code>proexceedances</code> as the proportion of samples with exceedances. Only the 28 relevant beaches for the Peconic Estuary are returned.</p>
 <pre class="r"><code>anlz_entpep(entdat)</code></pre>
 <pre><code>## # A tibble: 308 x 5
 ##    Name                     yr samples exceedances proexceedances
@@ -440,7 +440,7 @@ head(entdat)</code></pre>
 </div>
 <div id="plotting-results" class="section level2">
 <h2>Plotting results</h2>
-<p>A summary graphic can be plotted using the <code>show_matrixpep()</code> function. This creates an annual reporting matrix for the relative risk of pathogen exposure at 28 selected beaches in the Peconic Estuary. Tracking the number of exceedances of bacterial concentrations provides a framework for identifying locations that may need management actions to remediate potential public health issues.</p>
+<p>A summary graphic can be plotted using the <code>show_entmatrix()</code> function. This creates an annual reporting matrix for the relative risk of pathogen exposure at 28 selected beaches in the Peconic Estuary. Tracking the number of exceedances of bacterial concentrations provides a framework for identifying locations that may need management actions to remediate potential public health issues.</p>
 <pre class="r"><code>show_entmatrix(entdat)</code></pre>
 <div class="figure">
 <img src="pathogens_files/figure-html/unnamed-chunk-4-1.png" alt="Frequencies of exceedances of *Enterococcus* concentrations at Peconic Estuary bathing beaches for the years 2010 through 2020.  Values are proportion of samples exceeding." width="672" />
@@ -464,14 +464,6 @@ Frequencies of exceedances of <em>Enterococcus</em> concentrations at Peconic Es
 Frequencies of exceedances of <em>Enterococcus</em> concentrations at Peconic Estuary bathing beaches for the years 2010 through 2020. A different option is used for the threshold argument.
 </p>
 </div>
-<p>The matrix is also a <code>ggplot</code> object and its layout can be changed using <code>ggplot</code> elements. Note the use of <code>txtsz = NULL</code> to remove the text labels.</p>
-<pre class="r"><code>library(tidyverse)
-
-show_entmatrix(entdat, txtsz = NULL) +
-  scale_x_discrete(expand = c(0,0), breaks = c(2000:2020)) + 
-  coord_flip() +
-  theme(axis.text.x = element_text(angle = 60, hjust = 1, size = 7))</code></pre>
-<p><img src="pathogens_files/figure-html/unnamed-chunk-7-1.png" width="768" /></p>
 </div>
 </div>
 
