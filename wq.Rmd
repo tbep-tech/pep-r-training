@@ -81,10 +81,11 @@ The peptools package was developed as a set of functions to read, analyze, and p
 
 ## Basic use
 
-Before we use the package, we'll load it into our current R session as follows.  You should have already installed the package in the previous lesson. 
+Before we use the package, we'll load it into our current R session as follows.  We'll also load the mapview package. You should have already installed these packages in the previous lesson. 
 
 ```{r, eval = F}
 library(peptools)
+library(mapview)
 ```
 
 The package includes a `pepstations` data object that includes metadata for each station, including lat/lon and bay segment.  
@@ -99,7 +100,7 @@ The `pepseg` data object also included with the package shows the polygons for t
 mapview(pepseg)
 ```
 
-The water quality data can be imported using the `read_pepwq()` function.  The data are included in this lesson and it was obtained as a raw data file from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=8107f192ffac406380b6d61d3d3dbf7d).  To originla data faile is named "Peconics SCDHS WQ data - up to 2019 so far.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "currentdata.xlsx" that contains the water quality data is imported. 
+The water quality data can be imported using the `read_pepwq()` function.  The data are included in this lesson and it was obtained as a raw data file from [here](https://gisportal.suffolkcountyny.gov/gis/home/item.html?id=8107f192ffac406380b6d61d3d3dbf7d).  To original data file is named "Peconics SCDHS WQ data - up to 2019 so far.xlsx", or something similar depending on when the data were downloaded.  The location of this file on your computer is passed to the import function. Below, a local file renamed as "currentdata.xlsx" that contains the water quality data is imported. 
 
 ```{r}
 rawdat <- read_pepwq('data/currentdata.xlsx')
@@ -108,9 +109,9 @@ head(rawdat)
 
 The raw data includes multiple fields, but only the chlorophyll and secchi data are retained for reporting.  The data are in long format with the `name` column showing which observation (chlorophyll or secchi) the row `value` shows and the `status` showing if the observation was above or below detection (indicated as `>` or `<`).  Each station is also grouped by major bay segment, defined as `r levels(rawdat$bay_segment)`. 
 
-The function `anlz_pepdat()` summarizes the station data by bay segment.  The function returns annual means for chlorophyll and secchi depth and monthly means by year for chlorophyll and secchi depth. These summaries are then used to determine if bay segment targets for water quality are met using the `anlz_attain()` and `anlz_attainpep()` function.
+The function `anlz_medpep()` summarizes the station data by bay segment.  The function returns annual means for chlorophyll and secchi depth and monthly means by year for chlorophyll and secchi depth. These summaries are then used to determine if bay segment targets for water quality are met using the `anlz_attainpep()` function.
 
-Below shows how to use `anlz_pepdat()` to summarize the data by bay segment to estimate annual and monthly means for chlorophyll and secchi depth. The output is a two-element list for the annual (ann) and monthly (mos) means by segment.
+Below shows how to use `anlz_medpep()` to summarize the data by bay segment to estimate annual and monthly means for chlorophyll and secchi depth. The output is a two-element list for the annual (ann) and monthly (mos) means by segment.
 
 ```{r}
 medpep <- anlz_medpep(rawdat)
@@ -132,25 +133,25 @@ The `show_sitemappep()` function produces an interactive map of annual medians o
 Here, the 2019 chlorophyll medians are shown for stations in all bay segments. 
 
 ```{r}
-show_sitemappep(rawdat, 2019)
+show_sitemappep(rawdat, yrsel = 2019)
 ```
 
 A different year, parameter, and bay segment can also be chosen. Note that the size and color ramps are reversed for secchi depth, such that smaller and bluer points indicate larger secchi values. 
 
 ```{r}
-show_sitemappep(rawdat, 2010, 'sd', c('Central', 'Eastern'))
+show_sitemappep(rawdat, yrsel = 2010, param = 'sd', bay_segment = c('Central', 'Eastern'))
 ```
 
 By default, the color and size scaling in `show_sitemappep()` is relative to only the points on the map. You can view scaling relative to all values in the dataset (across time and space) to get a sense of how the values for the selected year compare to the rest of the record.  This can be done by changing the `relative` argument to `TRUE`. 
 
 ```{r}
-show_sitemappep(rawdat, 2019, relative = T)
+show_sitemappep(rawdat, yrsel = 2019, relative = T)
 ```
 
 The scaling is also sensitive to outliers.  The default is to use the maximum scaling as the 99th percentile value observed in the entire dataset for the chosen parameter.  Otherwise, non-sensical results will be returned if the absolute maximum value is used to set the scale.  If, however, you want to see scaling relative to a smaller quantile, you can choose it accordingly with the `maxrel` argument.  The size and color ramps will be scaled to the defined upper quantile value.  The actual observed value at a point will always be visible on mouseover.
 
 ```{r}
-show_sitemappep(rawdat, 2019, relative = T, maxrel = 0.8)
+show_sitemappep(rawdat, yrsel = 2019, relative = T, maxrel = 0.8)
 ```
 
 The `show_thrpep()` function provides a more descriptive assessment of annual trends for a chosen bay segment relative to thresholds. In this plot we show the annual medians and non-parametric confidence internals (95%) across stations for a segment.  The red line shows annual trends and the horizontal blue line indicates the threshold for chlorophyll-a.
@@ -168,7 +169,7 @@ show_thrpep(rawdat, bay_segment = "Western", param = "sd")
 The year range to plot can also be specified using the `yrrng` argument, where the default is `yrrng = c(1990, 2019)`.
 
 ```{r, fig.height = 5, fig.width = 8}
-show_thrpep(rawdat, bay_segment = "Western", param = "chla", yrrng = c(1976, 2019))
+show_thrpep(rawdat, bay_segment = "Western", param = "chla", yrrng = c(2000, 2010))
 ```
 
 Similarly, the `show_boxpep()` function provides an assessment of seasonal changes in chlorophyll or secchi depth values by bay segment.  The most recent year is highlighted in red by default. This allows a simple evaluation of how the most recent year compared to historical averages.  The threshold value is shown in blue text and as the dotted line.  This is the same dotted line shown in `show_thrpep()`.    
@@ -178,7 +179,7 @@ show_boxpep(rawdat, param = 'chla', bay_segment = "Western")
 show_boxpep(rawdat, param = 'sd', bay_segment = "Eastern")
 ```
 
-A different subset of years and selected year of interest can also be viewed by changing the `yrrng` and `yrsel` arguments.  Here we show 1980 compared to monthly averages for the last ten years. 
+A different subset of years and selected year of interest can also be viewed by changing the `yrrng` and `yrsel` arguments.  Here we show 1990 compared to monthly averages for the last ten years. 
 
 ```{r, fig.height = 5, fig.width = 8}
 show_boxpep(rawdat, param = 'chla', bay_segment = "Western", yrrng = c(2008, 2018), yrsel = 1990)
@@ -190,7 +191,7 @@ The `show_thrpep()` function is useful to understand annual variation in chlorop
 knitr::include_graphics('figure/outints.png')
 ```
 
-For the Peconic Estuary, light attenuation is replaced with Secchi depth. The outcomes above are assigned for both chlorophyll and secchi depth. The duration criteria are determined based on whether the exceedance was observed for years prior to the current year. The exceedance criteria for chlorophyll and light-attenuation are currently the same for each segment.  The peptools package contains a `peptargets` data file that is a reference for determining annual outcomes.  This file is loaded automatically with the package and can be viewed from the command line.
+The outcomes above are assigned for both chlorophyll and secchi depth. The duration criteria are determined based on whether the exceedance was observed for years prior to the current year. The exceedance criteria for chlorophyll and light-attenuation are currently the same for each segment.  The peptools package contains a `peptargets` data file that is a reference for determining annual outcomes.  This file is loaded automatically with the package and can be viewed from the command line.
 
 ```{r}
 peptargets
