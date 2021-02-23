@@ -49,7 +49,7 @@ head(dodat)
 
 Dissolved oxygen data typically show daily and seasonal variation.  Summaries of condition should account for variation at both temporal scales. Further, the impact of low dissolved oxygen concentrations on biota can vary depending on both magnitude and duration of hypoxia/anoxia.  As such, condition assessment could also consider how often concentrations fall below a thresholds and for how long. The assessments below speak to each of these needs. 
 
-First, the data can be summarized from the continuous (~6 minute observations) to daily averages using the `anlz_dodlpep()` function.  A user-specified threshold can be supplied to the `thr` argument to summarize the data relative to a value of interest, the default value being the acute threshold of 3 mg/L (an alternative may be the chronic threshold of 4.8 mg/L, [USEPA 2000](Ambient aquatic life water quality criteria for dissolved oxygen (saltwater): Cape Cod to Cape Hatteras)).
+First, the data can be summarized from the continuous (~6 minute observations) to daily averages using the `anlz_dodlypep()` function.  A user-specified threshold can be supplied to the `thr` argument to summarize the data relative to a value of interest, the default value being the acute threshold of 3 mg/L (an alternative may be the chronic threshold of 4.8 mg/L, [USEPA 2000](Ambient aquatic life water quality criteria for dissolved oxygen (saltwater): Cape Cod to Cape Hatteras)).
 
 ```{r}
 # 3 mg/l is acute, 4.8 mg/l is chronic
