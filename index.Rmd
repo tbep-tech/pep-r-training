@@ -59,7 +59,7 @@ Please view the [Data and Resources](Data_and_Resources.html) page for data used
 
 ## Instructor
 
-[Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([mbeck@tbep.org](mailto:mbeck@tbep.org)) - Marcus is the Program Scientist for the Tampa Bay Estuary Program and is developing data analysis and visualization methods for Bay health indicators.  He received his BS in Zoology from the University of Florida in 2007 and his MSc and PhD in Conservation Biology from the University of Minnesota in 2009 and 2013. Marcus has experience researching environmental indicators and developing open science products to support environmental decision-making.
+[Marcus Beck](https://fawda123.github.io/CV/Beck_CV.pdf) ([mbeck@tbep.org](mailto:mbeck@tbep.org)) - Marcus is the Program Scientist for the [Tampa Bay Estuary Program](https://tbep.org/) and is developing data analysis and visualization methods for Bay health indicators.  He received his BS in Zoology from the University of Florida in 2007 and his MSc and PhD in Conservation Biology from the University of Minnesota in 2009 and 2013. Marcus has experience researching environmental indicators and developing open science products to support environmental decision-making.
 
 ## Source content
 
