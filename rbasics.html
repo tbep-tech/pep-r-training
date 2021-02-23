@@ -401,7 +401,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/" target="_blank">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html" target="_blank">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-22, there are 17144 supplemental packages for R on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-23, there are 17153 supplemental packages for R on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -439,7 +439,7 @@ div.tocify {
 <li><p>Start RStudio if using a version you installed OR navigate to <a href="https://rstudio.cloud/project/2193924" target="_blank">https://rstudio.cloud/project/2193924</a> if using RStudio Cloud. To start both R and RStudio requires only firing up RStudio. RStudio should be available from All Programs at the Start Menu. Fire up RStudio.</p></li>
 <li><p>If you’re not using RStudio Cloud, create a new project (File menu, New project, New directory, New project, Directory Name…). Name it “r_workshop”. We will use this for the rest of the workshop.</p></li>
 <li><p>Create a new “R Script” in the Source Pane, save that file into your newly created project and name it “first_script.R”. It’ll just be a blank text file at this point.</p></li>
-<li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>.</p></li>
+<li><p>Add in a comment line to separate this section. It should look something like: <code># Exercise 1: Just Getting used to RStudio and Scripts</code>. Add some additional code that you can send to the console, e.g., try <code>1 + 1</code>.</p></li>
 <li><p>Lastly, we need to get this project set up with some example data for our exercises (if you’re using RStudio Cloud, ignore this step). You should have downloaded this already, but if not, the data are available <a href="data/data.zip">here</a>. The data are in a zipped folder. Download the file to your computer (anywhere). Create a folder in your new project named <code>data</code> and extract the files into this location.</p></li>
 </ol>
 </div>
@@ -455,32 +455,32 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  9.554883 12.901121 10.815758 12.765931 12.750264 10.372343 11.100170
-##   [8] 11.704254 12.422229 10.375252  9.134535 12.840492 11.656686  8.637798
-##  [15] 10.152231  8.453465  6.227445  9.178754 12.494072  9.319176 10.362547
-##  [22]  8.707959  8.941352 13.067983 12.840216  8.418854  8.741747  6.944803
-##  [29] 10.297858  6.322914  9.444035  6.954134  8.796665  8.860682  7.129979
-##  [36]  8.724614  9.016674  8.537391 13.674073 13.270353  9.310064  6.744715
-##  [43] 10.326662 10.335308  9.029508  7.286143  7.416121 13.127893  8.110264
-##  [50]  5.238718 10.575151 10.461410  9.018229  6.870793  9.698692  7.707527
-##  [57] 11.587369  9.959152  9.707965 13.571908 10.448104  8.781946 10.411362
-##  [64]  8.656046 10.857455 13.062016  8.941475  7.220498  7.695130 10.960347
-##  [71]  8.742065 11.277082 11.091643  9.279131  8.335419 12.290951 10.034122
-##  [78]  9.179428  9.072793  8.076662 11.060713  8.408293  9.349610  8.856155
-##  [85]  7.884958 10.106121 11.467702  9.096630 12.012244  7.980075 11.107851
-##  [92]  8.915254 10.118590  7.017676 11.883529  8.926521  9.327054 13.110233
-##  [99]  8.891873  8.444658</code></pre>
+<pre><code>##   [1] 12.955004  7.899400 10.826933  8.234647  8.512007 13.352085 10.954705
+##   [8]  9.830685 11.262577 10.779163  9.029369  9.023341  7.642816  5.819912
+##  [15] 13.366489  8.165199 11.910680  8.666692 10.557416 11.695794 10.334546
+##  [22] 12.967861  8.361231 11.065923  9.211129 12.512400  9.736381 10.937629
+##  [29]  9.496318  9.419220  8.629481  8.998642  9.815741 13.754959 11.660525
+##  [36] 10.608626  8.373239 11.431798 12.969120 10.600853  9.288623  8.346803
+##  [43] 10.605608 10.373149  8.069274  7.056355  8.847904 11.896233  9.015505
+##  [50]  7.479237 10.090072 10.520317  9.636749  3.470667 13.948516 10.621667
+##  [57] 12.115663  9.903743  9.550933  9.889276 13.047212 10.474144  8.757283
+##  [64] 11.980822  9.236219  8.350253  6.913491 10.571134 10.245688 10.013757
+##  [71] 11.603280  8.535701 13.526687 11.498649 10.816505 10.071079  4.506081
+##  [78]  8.440401  9.960279  6.750566  8.111475 11.269196  6.406977  8.749936
+##  [85]  9.377527  9.760077  8.189642  9.683638  9.838664  8.519458  9.356093
+##  [92]  7.227044 10.025896 13.254537  8.735322  8.970885 15.650046 10.861955
+##  [99] 11.271303  7.192951</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] 0.07447524</code></pre>
+<pre><code>## [1] 0.07846437</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -0.05785107</code></pre>
+<pre><code>## [1] 8.264621</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] -8.052327</code></pre>
+<pre><code>## [1] 11.26666</code></pre>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
 <p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
@@ -492,7 +492,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-22, there are 17144 packages on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-23, there are 17153 packages on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -578,7 +578,7 @@ apropos(&quot;print&quot;) # Returns all available functions with &quot;print&qu
 <p>There is a bewildering amount of formats for storing data and R is no exception. Understanding the basic building blocks that make up data types is essential. All functions in R require specific types of input data and the key to using functions is knowing how these types relate to each other.</p>
 <div id="vectors-one-dimensional-data" class="section level3">
 <h3>Vectors (one-dimensional data)</h3>
-<p>The basic data format in R is a vector - a one-dimensional grouping of elements that have the same type. These are all vectors and they are created with the <code>c</code> function:</p>
+<p>The basic data format in R is a vector - a one-dimensional grouping of elements that have the same type. These are all vectors and they are created with the <code>c</code> (concatenate) function:</p>
 <pre class="r"><code>dbl_var &lt;- c(1, 2.5, 4.5)
 int_var &lt;- c(1L, 6L, 10L)
 log_var &lt;- c(TRUE, FALSE, T, F)
@@ -623,7 +623,7 @@ mydf</code></pre>
 </div>
 <div id="the-working-directory" class="section level2">
 <h2>The working directory</h2>
-<p>Before we import data, we need to talk about the “working directory”. Whenever RStudio is opened, it uses a file location on your computer to access and save data. If you’re using an RStudio project, the working directory will be the folder where you created the project. If not, it is probably the the user’s home directory (e.g., <code>C:/Users/Marcus</code>), which you’ll want to change to where you have your data.</p>
+<p>Before we import data, we need to talk about the “working directory”. Whenever RStudio is opened, it uses a file location on your computer to access and save data. If you’re using an RStudio project, the working directory will be the folder where you created the project. If not, it is probably the user’s home directory (e.g., <code>C:/Users/Marcus</code>), which you’ll want to change to where you have your data.</p>
 <p>You can see your working directory with the <code>getwd()</code> function or from the file path at the top of the console in RStudio. All files in the File pane window on the bottom right of RStudio are also those within the working directory. If you want to change your working directory, you can use the <code>setwd()</code> function and put the file path (as a character string) inside the function, e.g., <code>setwd('C:/Users/Marcus/Desktop/newdirectory')</code>.</p>
 <p>The working directory is important to know when you’re importing or exporting data. When you import data, a <em>relative</em> file path can be used that is an extension of the working directory. For example, if your working directory is <code>'C:/Users/Marcus/Desktop'</code> and you have a file called <code>mydata.xlsx</code> in that directory, you can use <code>read_excel('mydata.xlsx')</code> to import the file. Alternatively, if there’s a folder called “data” in your working directory with the file you want to import, you would use <code>read_excel('data/mydata.xlsx')</code>.</p>
 <p>If you want to import a file that is not in your working directory, you will have to use an <em>absolute</em> path that is the full file location. Otherwise, R will not know where to look outside of the working directory.</p>
@@ -637,7 +637,7 @@ mydf</code></pre>
 rawdat &lt;- read_excel(&#39;data/currentdata.xlsx&#39;)
 enterodat &lt;- read_excel(&#39;data/enterodata.xlsx&#39;)</code></pre></li>
 <li><p>Send the commands to the console with <code>ctrl+enter</code>.</p></li>
-<li><p>Verify that the data imported correctly by viewing the first six rows of each dataset. Use the <code>head()</code> function directly in the console, e.g., <code>head(fishdat)</code> or <code>head(statloc)</code></p></li>
+<li><p>Verify that the data imported correctly by viewing the first six rows of each dataset. Use the <code>head()</code> function directly in the console, e.g., <code>head(rawdat)</code> or <code>head(enterodat)</code></p></li>
 </ol>
 <p>Let’s explore the datasets a bit. There are many useful functions for exploring the characteristics of a dataset. This is always a good idea when you first import something.</p>
 <pre class="r"><code># get the dimensions
