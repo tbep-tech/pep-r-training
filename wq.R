@@ -1,4 +1,5 @@
 ## library(peptools)
+## library(mapview)
 
 pepstations
 
@@ -12,19 +13,19 @@ medpep
 
 anlz_attainpep(medpep)
 
-show_sitemappep(rawdat, 2019)
+show_sitemappep(rawdat, yrsel = 2019)
 
-show_sitemappep(rawdat, 2010, 'sd', c('Central', 'Eastern'))
+show_sitemappep(rawdat, yrsel = 2010, param = 'sd', bay_segment = c('Central', 'Eastern'))
 
-show_sitemappep(rawdat, 2019, relative = T)
+show_sitemappep(rawdat, yrsel = 2019, relative = T)
 
-show_sitemappep(rawdat, 2019, relative = T, maxrel = 0.8)
+show_sitemappep(rawdat, yrsel = 2019, relative = T, maxrel = 0.8)
 
 show_thrpep(rawdat, bay_segment = "Western", param = "chla")
 
 show_thrpep(rawdat, bay_segment = "Western", param = "sd")
 
-show_thrpep(rawdat, bay_segment = "Western", param = "chla", yrrng = c(1976, 2019))
+show_thrpep(rawdat, bay_segment = "Western", param = "chla", yrrng = c(2000, 2010))
 
 show_boxpep(rawdat, param = 'chla', bay_segment = "Western")
 show_boxpep(rawdat, param = 'sd', bay_segment = "Eastern")
