@@ -13,6 +13,8 @@ This course is designed to expose you to the fundamentals of using R for working
 
 ## Agenda
 
+Please see [this link](https://drive.google.com/file/d/1ZjVHFrVpw2uTKZw-BmD29umdbl6viutM/view?usp=sharing) for a live recording of the training. 
+
 __Tuesday, February 23rd, 2021__
 
 * __9:00 - 10:00__ [R Basics](rbasics.html)
