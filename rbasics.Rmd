@@ -159,7 +159,7 @@ We're going to install some packages from CRAN that will give us the tools for o
 install.packages("tidyverse")
 install.packages("remotes")
 install.packages("mapview")
-remotes::install_github("remotes/peptools")
+remotes::install_github("tbep-tech/peptools")
     ```
 
 1. Select all the lines by clicking and dragging the mouse pointer over the text.  
