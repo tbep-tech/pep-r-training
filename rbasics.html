@@ -19,21 +19,14 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -47,6 +40,11 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -59,7 +57,32 @@ if (window.hljs) {
 
 
 
-
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
 
 
 
@@ -69,6 +92,10 @@ if (window.hljs) {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -85,13 +112,40 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
-pre code {
-  padding: 0;
-}
 </style>
 
 
 <style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 52px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h2 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h3 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h4 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h5 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h6 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
 .dropdown-submenu {
   position: relative;
 }
@@ -119,7 +173,7 @@ pre code {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
+  border-left-color: #ffffff;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -131,7 +185,7 @@ pre code {
 }
 </style>
 
-<script type="text/javascript">
+<script>
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -142,23 +196,10 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.tab('show');
+  menuAnchor.parent().addClass('active');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
-
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
 });
 </script>
 
@@ -170,6 +211,7 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
+  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -295,13 +337,13 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -337,14 +379,14 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="Data_and_Resources.html">
-    <span class="fas fa-list"></span>
+    <span class="fa fa-list"></span>
      
     Data and resources
   </a>
 </li>
 <li>
   <a href="https://github.com/tbep-tech/pep-r-training">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -353,7 +395,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div class="fluid-row" id="header">
 
 
 
@@ -401,7 +443,7 @@ div.tocify {
 <ul>
 <li>The growth of R as explained in the <a href="https://stackoverflow.blog/2017/10/10/impressive-growth-r/" target="_blank">Stack Overflow blog</a>, <a href="http://blog.revolutionanalytics.com/2016/07/r-moves-up-to-5th-place-in-ieee-language-rankings.html" target="_blank">IEEE rating</a></li>
 </ul>
-<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-23, there are 17153 supplemental packages for R on CRAN!</p>
+<p>R is also an open-source programming language - not only is it free, but this means anybody can contribute to it’s development. As of 2021-02-24, there are 17150 supplemental packages for R on CRAN!</p>
 </div>
 </div>
 <div id="rstudio" class="section level2">
@@ -446,7 +488,7 @@ div.tocify {
 <div id="r-language-fundamentals" class="section level2">
 <h2>R language fundamentals</h2>
 <p>R is built around functions. These are commands that do specific things based on what you provide. The basic syntax of a function follows the form: <code>function_name(arg1, arg2, ...)</code>.</p>
-<p>With the base install, you will gain access to many functions (3621, to be exact). Some examples:</p>
+<p>With the base install, you will gain access to many functions (3619, to be exact). Some examples:</p>
 <pre class="r"><code># print
 print(&#39;hello world!&#39;)</code></pre>
 <pre><code>## [1] &quot;hello world!&quot;</code></pre>
@@ -455,32 +497,24 @@ seq(1, 10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
 <pre class="r"><code># random numbers
 rnorm(100, mean = 10, sd = 2)</code></pre>
-<pre><code>##   [1]  4.579444  8.193373 10.796553 11.074179 11.767572  9.534697 16.566451
-##   [8] 10.867337  8.133207 13.472220 10.770688  9.200442  7.297469 10.327034
-##  [15]  8.817898 12.522000  9.963248  8.625956  6.213158  8.757873 11.845763
-##  [22]  8.496393  9.303897  9.220208  8.494152 10.677059 12.507651  8.562565
-##  [29] 11.664438  8.656182  8.869336  8.823903 13.325293 13.037458  8.657377
-##  [36] 10.112825  7.731910  9.393993 15.198463  5.530007  8.769276 11.089904
-##  [43] 11.991900 10.990082  5.452070  9.085648 10.584995 12.200904  7.488171
-##  [50] 10.006733 12.476951  8.042784  7.190845  7.815886  9.385184 11.993315
-##  [57]  6.456883 10.163924 13.192645  5.725707  7.070372  7.988028  8.573580
-##  [64] 11.007584  9.911148  4.192805 13.042084  8.264043  8.885791  8.938825
-##  [71] 10.304919  9.415601 12.873848 10.134940  7.626336 10.259163 10.265130
-##  [78]  8.718417  5.635876  9.989459 12.771138  9.623834  9.044418 13.577324
-##  [85] 12.444382  9.294926 14.368623  8.783042 11.006719 14.597550 10.625343
-##  [92]  9.997221  9.375409 11.602612  5.441338 13.721794  8.023163  8.330745
-##  [99] 11.320920  7.942985</code></pre>
+<pre><code>##   [1] 11.178875 11.498952 10.387659  8.808251  8.596781 10.965324 10.057119  7.380357 10.952506 14.784175 12.000949  8.413459  7.853540  6.910128  6.086162
+##  [16] 11.865425  6.902456  9.010624 10.373348  9.658143 12.223370 11.202918  7.760385  9.442691 11.928161  7.176775  9.317225 10.075500 11.095533 10.054435
+##  [31]  8.837872 10.846581 11.758645  7.204066  8.022875  8.266613 11.627953 11.304753 10.531880  7.204883  8.840393  8.180681 11.456564  8.548908 10.495710
+##  [46] 12.001050 10.152805  9.375010  9.980176 10.350903 10.917954  4.158456  9.870627  8.917007  9.434351 13.841252 10.932318  8.809656  9.526088 10.090105
+##  [61]  6.354525 10.990970 10.168410 11.186818 12.203709 12.814416 10.615775 13.038537 10.540689 10.726083 10.743004  8.645454 12.397826 11.191365 10.659246
+##  [76] 12.081469 10.635382 10.758464 10.822857  8.379168  6.301474  9.034694  8.559944 12.631914  9.956168  6.709441 10.612426  9.292034  7.793491  8.317630
+##  [91] 11.988152  9.701023  9.452591  8.529176 10.391152  8.500009 13.894446 12.100309  9.184549  6.659331</code></pre>
 <pre class="r"><code># average 
 mean(rnorm(100))</code></pre>
-<pre><code>## [1] -0.001994366</code></pre>
+<pre><code>## [1] 0.03432384</code></pre>
 <pre class="r"><code># sum
 sum(rnorm(100))</code></pre>
-<pre><code>## [1] -24.58352</code></pre>
+<pre><code>## [1] -8.334203</code></pre>
 <p>Very often you will see functions used like this:</p>
 <pre class="r"><code>my_random_sum &lt;- sum(rnorm(100))</code></pre>
 <p>In this case the first part of the line is the name of an object. You make this up. Ideally it should have some meaning, but the only rules are that it can’t start with a number and must not have any spaces. The second bit, <code>&lt;-</code>, is the assignment operator. This tells R to take the result of <code>sum(rnorm(100))</code> and store it in an object named, <code>my_random_sum</code>. It is stored in the environment and can be used by just executing it’s name in the console.</p>
 <pre class="r"><code>my_random_sum</code></pre>
-<pre><code>## [1] 9.006066</code></pre>
+<pre><code>## [1] 4.437334</code></pre>
 <div id="what-is-the-environment" class="section level3">
 <h3>What is the environment?</h3>
 <p>There are two outcomes when you run code. First, the code will simply print output directly in the console. Second, there is no output because you have stored it as a variable using <code>&lt;-</code>. Output that is stored is actually saved in the <code>environment</code>. The environment is the collection of named objects that are stored in memory for your current R session. Anything stored in memory will be accessible by it’s name without running the original script that was used to create it.</p>
@@ -492,7 +526,7 @@ sum(rnorm(100))</code></pre>
 </div>
 <div id="cran" class="section level3">
 <h3>CRAN</h3>
-<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-23, there are 17153 packages on CRAN!</p>
+<p>One of the reasons for R’s popularity is CRAN, <a href="http://cran.r-project.org/" target="_blank">The Comprehensive R Archive Network</a>. This is where you download R and also where most will gain access to packages (there are other places, but that is for later). Not much else to say about this now other than to be aware of it. As of 2021-02-24, there are 17150 packages on CRAN!</p>
 </div>
 <div id="installing-packages" class="section level3">
 <h3>Installing packages</h3>
@@ -508,7 +542,7 @@ sum(rnorm(100))</code></pre>
 install.packages(&quot;tidyverse&quot;)
 install.packages(&quot;remotes&quot;)
 install.packages(&quot;mapview&quot;)
-remotes::install_github(&quot;remotes/peptools&quot;)</code></pre></li>
+remotes::install_github(&quot;tbep-tech/peptools&quot;)</code></pre></li>
 <li><p>Select all the lines by clicking and dragging the mouse pointer over the text.</p></li>
 <li><p>Send all the commands to the console using <code>ctrl+enter</code>. You should see some text output on the console about the installation process. The installation may take a few minutes so don’t be alarmed.</p></li>
 <li><p>After the packages are done installing, verify that there were no errors during the process (this should be pretty obvious, i.e., error text in big scary red letters).</p></li>
@@ -647,65 +681,46 @@ dim(rawdat)</code></pre>
 <pre><code>## [1] 36231     7</code></pre>
 <pre class="r"><code># get the column names
 names(rawdat)</code></pre>
-<pre><code>##  [1] &quot;Date&quot;                         &quot;Time&quot;                        
-##  [3] &quot;BayStation&quot;                   &quot;Diurnal&quot;                     
-##  [5] &quot;Location&quot;                     &quot;Replicate&quot;                   
-##  [7] &quot;Depth&quot;                        &quot;Secchi&quot;                      
-##  [9] &quot;Temp&quot;                         &quot;D.O.&quot;                        
-## [11] &quot;Sal&quot;                          &quot;Cond&quot;                        
-## [13] &quot;pH&quot;                           &quot;T Coliform&quot;                  
-## [15] &quot;F Coliform&quot;                   &quot;NH3&quot;                         
-## [17] &quot;NO2&quot;                          &quot;NO3&quot;                         
-## [19] &quot;Nox&quot;                          &quot;Urea&quot;                        
-## [21] &quot;TKN&quot;                          &quot;DKN&quot;                         
-## [23] &quot;TN&quot;                           &quot;DN&quot;                          
-## [25] &quot;Total Phosphate&quot;              &quot;Dissolved Phosphate&quot;         
-## [27] &quot;TP&quot;                           &quot;DP&quot;                          
-## [29] &quot;o-PO4&quot;                        &quot;TOC&quot;                         
-## [31] &quot;DOC&quot;                          &quot;Silicates&quot;                   
-## [33] &quot;Chloride&quot;                     &quot;Sulfate&quot;                     
-## [35] &quot;TSS&quot;                          &quot;Chlorophyll A - Total&quot;       
-## [37] &quot;Chlorophyll A - Fractionated&quot; &quot;Aureo&quot;                       
-## [39] &quot;Tide&quot;                         &quot;Weather&quot;                     
+<pre><code>##  [1] &quot;Date&quot;                         &quot;Time&quot;                         &quot;BayStation&quot;                   &quot;Diurnal&quot;                      &quot;Location&quot;                    
+##  [6] &quot;Replicate&quot;                    &quot;Depth&quot;                        &quot;Secchi&quot;                       &quot;Temp&quot;                         &quot;D.O.&quot;                        
+## [11] &quot;Sal&quot;                          &quot;Cond&quot;                         &quot;pH&quot;                           &quot;T Coliform&quot;                   &quot;F Coliform&quot;                  
+## [16] &quot;NH3&quot;                          &quot;NO2&quot;                          &quot;NO3&quot;                          &quot;Nox&quot;                          &quot;Urea&quot;                        
+## [21] &quot;TKN&quot;                          &quot;DKN&quot;                          &quot;TN&quot;                           &quot;DN&quot;                           &quot;Total Phosphate&quot;             
+## [26] &quot;Dissolved Phosphate&quot;          &quot;TP&quot;                           &quot;DP&quot;                           &quot;o-PO4&quot;                        &quot;TOC&quot;                         
+## [31] &quot;DOC&quot;                          &quot;Silicates&quot;                    &quot;Chloride&quot;                     &quot;Sulfate&quot;                      &quot;TSS&quot;                         
+## [36] &quot;Chlorophyll A - Total&quot;        &quot;Chlorophyll A - Fractionated&quot; &quot;Aureo&quot;                        &quot;Tide&quot;                         &quot;Weather&quot;                     
 ## [41] &quot;Water Color&quot;</code></pre>
 <pre class="r"><code>names(enterodat)</code></pre>
-<pre><code>## [1] &quot;Beach_EPA_ID&quot;   &quot;Name&quot;           &quot;FieldNum&quot;       &quot;ColDate&quot;       
-## [5] &quot;Time&quot;           &quot;Waterbody_Area&quot; &quot;Result&quot;</code></pre>
+<pre><code>## [1] &quot;Beach_EPA_ID&quot;   &quot;Name&quot;           &quot;FieldNum&quot;       &quot;ColDate&quot;        &quot;Time&quot;           &quot;Waterbody_Area&quot; &quot;Result&quot;</code></pre>
 <pre class="r"><code># see the first six rows
 head(rawdat)</code></pre>
 <pre><code>## # A tibble: 6 x 41
-##   Date                Time                BayStation Diurnal Location Replicate
-##   &lt;dttm&gt;              &lt;dttm&gt;                   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;    
-## 1 1976-07-20 00:00:00 1899-12-31 07:00:00      60100 A       &lt;NA&gt;     &lt;NA&gt;     
-## 2 1976-07-20 00:00:00 1899-12-31 13:20:00      60100 P       &lt;NA&gt;     &lt;NA&gt;     
-## 3 1976-07-20 00:00:00 1899-12-31 06:10:00      60110 A       &lt;NA&gt;     &lt;NA&gt;     
-## 4 1976-07-20 00:00:00 1899-12-31 06:25:00      60110 A       &lt;NA&gt;     R        
-## 5 1976-07-20 00:00:00 1899-12-31 13:00:00      60110 P       &lt;NA&gt;     &lt;NA&gt;     
-## 6 1976-07-20 00:00:00 1899-12-31 13:10:00      60110 P       &lt;NA&gt;     R        
-## # ... with 35 more variables: Depth &lt;dbl&gt;, Secchi &lt;dbl&gt;, Temp &lt;dbl&gt;,
-## #   D.O. &lt;dbl&gt;, Sal &lt;dbl&gt;, Cond &lt;lgl&gt;, pH &lt;lgl&gt;, T Coliform &lt;chr&gt;,
-## #   F Coliform &lt;chr&gt;, NH3 &lt;chr&gt;, NO2 &lt;chr&gt;, NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;,
-## #   TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, Total Phosphate &lt;dbl&gt;,
-## #   Dissolved Phosphate &lt;dbl&gt;, TP &lt;lgl&gt;, DP &lt;lgl&gt;, o-PO4 &lt;dbl&gt;, TOC &lt;lgl&gt;,
-## #   DOC &lt;lgl&gt;, Silicates &lt;lgl&gt;, Chloride &lt;lgl&gt;, Sulfate &lt;lgl&gt;, TSS &lt;lgl&gt;,
-## #   Chlorophyll A - Total &lt;dbl&gt;, Chlorophyll A - Fractionated &lt;lgl&gt;,
-## #   Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, Water Color &lt;lgl&gt;</code></pre>
+##   Date                Time                BayStation Diurnal Location Replicate Depth Secchi  Temp  D.O.   Sal Cond  pH    `T Coliform` `F Coliform` NH3   NO2  
+##   &lt;dttm&gt;              &lt;dttm&gt;                   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;
+## 1 1976-07-20 00:00:00 1899-12-31 07:00:00      60100 A       &lt;NA&gt;     &lt;NA&gt;         10     NA  21.8   6.8  28.3 NA    NA    &lt;NA&gt;         &lt;NA&gt;         &lt; 0.~ 2E-3 
+## 2 1976-07-20 00:00:00 1899-12-31 13:20:00      60100 P       &lt;NA&gt;     &lt;NA&gt;         12      6  23.8   7.3  28.2 NA    NA    &lt; 3          &lt; 3          2E-3  2E-3 
+## 3 1976-07-20 00:00:00 1899-12-31 06:10:00      60110 A       &lt;NA&gt;     &lt;NA&gt;         23      5  22.4   6.8  28.4 NA    NA    &lt; 3          &lt; 3          &lt; 0.~ 2E-3 
+## 4 1976-07-20 00:00:00 1899-12-31 06:25:00      60110 A       &lt;NA&gt;     R            23      5  22.4   6.6  28.4 NA    NA    &lt; 3          &lt; 3          3.00~ 2E-3 
+## 5 1976-07-20 00:00:00 1899-12-31 13:00:00      60110 P       &lt;NA&gt;     &lt;NA&gt;         22      6  23.8   7.3  28.4 NA    NA    &lt; 3          &lt; 3          5.00~ 2E-3 
+## 6 1976-07-20 00:00:00 1899-12-31 13:10:00      60110 P       &lt;NA&gt;     R            22      6  23.8   7.7  28.4 NA    NA    93           &lt; 3          6.00~ 2E-3 
+## # ... with 24 more variables: NO3 &lt;chr&gt;, Nox &lt;lgl&gt;, Urea &lt;lgl&gt;, TKN &lt;chr&gt;, DKN &lt;chr&gt;, TN &lt;lgl&gt;, DN &lt;lgl&gt;, `Total Phosphate` &lt;dbl&gt;, `Dissolved Phosphate` &lt;dbl&gt;,
+## #   TP &lt;lgl&gt;, DP &lt;lgl&gt;, `o-PO4` &lt;dbl&gt;, TOC &lt;lgl&gt;, DOC &lt;lgl&gt;, Silicates &lt;lgl&gt;, Chloride &lt;lgl&gt;, Sulfate &lt;lgl&gt;, TSS &lt;lgl&gt;, `Chlorophyll A - Total` &lt;dbl&gt;,
+## #   `Chlorophyll A - Fractionated` &lt;lgl&gt;, Aureo &lt;dbl&gt;, Tide &lt;lgl&gt;, Weather &lt;lgl&gt;, `Water Color` &lt;lgl&gt;</code></pre>
 <pre class="r"><code>head(enterodat)</code></pre>
 <pre><code>## # A tibble: 6 x 7
-##   Beach_EPA_ID Name             FieldNum ColDate             Time               
-##   &lt;lgl&gt;        &lt;chr&gt;            &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;             
-## 1 NA           Bayport Beach    I10      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 2 NA           Sayville Marina~ I11      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 3 NA           Bayberry Beach ~ I27      2020-05-18 00:00:00 1899-12-31 12:00:00
-## 4 NA           East Islip Beach I4       2020-05-18 00:00:00 1899-12-31 12:00:00
-## 5 NA           Islip Beach      I3       2020-05-18 00:00:00 1899-12-31 12:00:00
-## 6 NA           Benjamin Beach   I2       2020-05-18 00:00:00 1899-12-31 12:00:00
-## # ... with 2 more variables: Waterbody_Area &lt;lgl&gt;, Result &lt;chr&gt;</code></pre>
+##   Beach_EPA_ID Name                               FieldNum ColDate             Time                Waterbody_Area Result
+##   &lt;lgl&gt;        &lt;chr&gt;                              &lt;chr&gt;    &lt;dttm&gt;              &lt;dttm&gt;              &lt;lgl&gt;          &lt;chr&gt; 
+## 1 NA           Bayport Beach                      I10      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 2 NA           Sayville Marina Park Beach         I11      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 3 NA           Bayberry Beach &amp; Tennis Club Beach I27      2020-05-18 00:00:00 1899-12-31 12:00:00 NA             0     
+## 4 NA           East Islip Beach                   I4       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             4     
+## 5 NA           Islip Beach                        I3       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             12    
+## 6 NA           Benjamin Beach                     I2       2020-05-18 00:00:00 1899-12-31 12:00:00 NA             8</code></pre>
 <pre class="r"><code># get the overall structure
 str(rawdat)</code></pre>
 <pre><code>## tibble [33,978 x 41] (S3: tbl_df/tbl/data.frame)
-##  $ Date                        : POSIXct[1:33978], format: &quot;1976-07-20&quot; &quot;1976-07-20&quot; ...
-##  $ Time                        : POSIXct[1:33978], format: &quot;1899-12-31 07:00:00&quot; &quot;1899-12-31 13:20:00&quot; ...
+##  $ Date                        : POSIXct[1:33978], format: &quot;1976-07-20&quot; &quot;1976-07-20&quot; &quot;1976-07-20&quot; &quot;1976-07-20&quot; ...
+##  $ Time                        : POSIXct[1:33978], format: &quot;1899-12-31 07:00:00&quot; &quot;1899-12-31 13:20:00&quot; &quot;1899-12-31 06:10:00&quot; &quot;1899-12-31 06:25:00&quot; ...
 ##  $ BayStation                  : num [1:33978] 60100 60100 60110 60110 60110 ...
 ##  $ Diurnal                     : chr [1:33978] &quot;A&quot; &quot;P&quot; &quot;A&quot; &quot;A&quot; ...
 ##  $ Location                    : chr [1:33978] NA NA NA NA ...
@@ -750,8 +765,8 @@ str(rawdat)</code></pre>
 ##  $ Beach_EPA_ID  : logi [1:36231] NA NA NA NA NA NA ...
 ##  $ Name          : chr [1:36231] &quot;Bayport Beach&quot; &quot;Sayville Marina Park Beach&quot; &quot;Bayberry Beach &amp; Tennis Club Beach&quot; &quot;East Islip Beach&quot; ...
 ##  $ FieldNum      : chr [1:36231] &quot;I10&quot; &quot;I11&quot; &quot;I27&quot; &quot;I4&quot; ...
-##  $ ColDate       : POSIXct[1:36231], format: &quot;2020-05-18&quot; &quot;2020-05-18&quot; ...
-##  $ Time          : POSIXct[1:36231], format: &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; ...
+##  $ ColDate       : POSIXct[1:36231], format: &quot;2020-05-18&quot; &quot;2020-05-18&quot; &quot;2020-05-18&quot; &quot;2020-05-18&quot; ...
+##  $ Time          : POSIXct[1:36231], format: &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; &quot;1899-12-31 12:00:00&quot; ...
 ##  $ Waterbody_Area: logi [1:36231] NA NA NA NA NA NA ...
 ##  $ Result        : chr [1:36231] &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;4&quot; ...</code></pre>
 <p>You can also view each dataset in a spreadsheet style in the scripting window:</p>
@@ -789,7 +804,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
+    $(this).parent().toggleClass('nav-tabs-open')
   });
 });
 </script>

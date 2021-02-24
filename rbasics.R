@@ -21,7 +21,7 @@ my_random_sum
 ## install.packages("tidyverse")
 ## install.packages("remotes")
 ## install.packages("mapview")
-## remotes::install_github("remotes/peptools")
+## remotes::install_github("tbep-tech/peptools")
 
 library("tidyverse")
 library("readxl")
